@@ -1,0 +1,20 @@
+	<div class="container">
+		<div class="page-header">
+			<center> <h1> Formulario de alta Productos</h1>   </center>     
+		</div>
+		<div class="CajaInicio animated bounceInRight">
+             <h1>Ingrese Producto:</h1>
+
+			<form name="formAlta" align='center' enctype="multipart/form-data" >		
+		
+			<input type="text" ng-model="alta.nombre" placeholder="Ingrese nombre" required> 
+			<input type="text" ng-model="alta.precio" placeholder="ingrese precio" required/>
+
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-click="guardar()" ng-if="!formAlta.$invalid" ><span class="glyphicon glyphicon-save">&nbsp;</span>Agregar Producto!</a>
+					
+				</div>
+
+			</form>
+
+			</div>
+	</div>

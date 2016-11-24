@@ -1,0 +1,48 @@
+	<div class="container">
+		<div ng-if="!modo">
+		<table class="table table-hover table-responsive">
+			<tr>
+				<th>ID</th>
+			    <th>EMAIL</th>
+			    <th>NOMBRE</th>
+			    <th>TIPO</th>
+			</tr>
+			<tr ng-repeat="usuario in listado track by $index">
+				<td> {{usuario.id}} </td>
+				<td> {{usuario.correo}} </td>
+				<td> {{usuario.nombre}} </td>
+				<td> {{usuario.tipo}} </td>
+				
+
+
+				<td> <button  class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
+				<td> <button ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+
+			</tr>			 
+			    
+		</table>
+		</div>
+
+			<div ng-if="modo">
+				<div class="page-header">
+			<center> <h1> Modificacion</h1>   </center>     
+				</div>
+
+
+				<form name="formAlta" class="tablas" enctype="multipart/form-data">
+				<input type="text" ng-model="modificar.correo" placeholder="ingrese correo" required/>
+				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
+				<input type="text" ng-model="modificar.clave" placeholder="Ingrese password" required> 		
+				<select ng-model="modificar.tipo" >
+			    	<option value="Administrador">Administrador</option>
+			    	<option value="Encargado">Encargado</option>
+			    	<option value="Empleado">Empleado</option>
+			    	<option value="Cliente">Cliente</option>
+			    </select>
+
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar usuario!</a>
+					
+				</div>
+			</div>
+
+			</form>

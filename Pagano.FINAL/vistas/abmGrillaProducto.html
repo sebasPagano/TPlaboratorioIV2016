@@ -1,0 +1,41 @@
+	<div class="container">
+	
+		<div ng-if="!modo">
+		<table class="table table-hover table-responsive" align="center">
+			<tr>
+			    <th>ID</th>
+			    <th>NOMBRE</th> 
+			    <th>PRECIO</th>
+			    
+			</tr>
+			<tr ng-repeat="producto in listado track by $index">
+
+				<td> {{producto.id}} </td>
+				<td> {{producto.nombre}} </td>
+				<td> {{producto.precio}} </td>
+				
+				
+
+
+				<td> <button  class="miBotonUtn" ng-click="borrar(producto.id)"> Borrar </button> </td>
+				<td> <button class="miBotonUtn" ng-click="desplegarMod(producto)"> Modificar </button> </td>
+				<!-- ng-if="usuario.tipo!='comprador'" -->
+			</tr>			 
+			    
+		</table>
+		</div>
+
+			<div ng-if="modo">
+				<div class="page-header">
+			<center> <h1> Modificacion</h1>   </center>     
+				</div>
+				<form name="formAlta" class="tablas" enctype="multipart/form-data">
+				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
+				<input type="text" ng-model="modificar.precio" placeholder="ingrese precio" required/>
+
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
+					
+				</div>
+			</div>
+
+			</form>

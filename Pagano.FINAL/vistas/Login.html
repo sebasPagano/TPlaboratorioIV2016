@@ -1,0 +1,38 @@
+
+ <div class="container">
+    <div class="page-header">
+        <center><h1>Login</h1> </center>     
+    </div>
+     
+			<div class="CajaInicio animated bounceInRight">
+                    <h1>Ingrese Usuario:</h1>
+                    
+                    <form id="FormLogin">
+                              
+                      <div class="form-group">
+                      <label class=" required-field">Nombre</label> 
+                      <input type="text" name="nombre" id="id_nombre" ng-model="datos.nombre"required>
+                    </div>        
+      		           <div class="form-group">
+                      <label class=" required-field">Email:</label> 
+                      <input type="text" name="username" id="id_username" ng-model="datos.correo" maxlength="150" required >
+                    </div>
+                    <div class="form-group">
+                      <label class=" required-field">Password:</label> 
+                      <input type="password" name="password"  class="form-control" id="id_password" ng-model="datos.clave" required>
+                    </div>
+                 
+                    <button ng-click="login()" class="btn btn-default btn-primary" value="Login">Login</button><br>
+                    
+      		                                
+                  </div>
+                                
+            </form>
+              <div class="row">
+       <input type="button" value="Administrador" style="width:30%; display:inline" ng-click="Acceso('admin','admin@admin.com', '321')">
+        <input type="button" value="Encargado"  style="width:30%; display:inline" ng-click="Acceso('encargado','encargado@encargado.com', '321')">
+        <input type="button" value="Empleado"  style="width:30%; display:inline" ng-click="Acceso('empleado','empleado@empleado.com', '123')">
+        <input type="button" value="Cliente"  style="width:30%; display:inline" ng-click="Acceso('cliente','cliente@cliente.com', '123')">
+      </div>
+       </div>
+ </div>

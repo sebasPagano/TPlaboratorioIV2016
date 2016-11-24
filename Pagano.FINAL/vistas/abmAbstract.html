@@ -1,0 +1,14 @@
+<ul class="nav nav-pills">
+  <li role="presentation"><a ui-sref="abm.grilla()">Grilla</a></li>
+  <!-- ng-if="usuario.tipo=='administrador'" -->
+  <li role="presentation"><a ui-sref="abm.alta()">Alta</a></li> 
+  <li role="presentation"><a ui-sref="abm.grillaProducto()">GrillaProductos</a></li>
+  <li role="presentation"><a ui-sref="abm.altaProducto()">AltaProductos</a></li>
+  <li role="presentation"><a ng-click="logout()">LogOut</a></li>
+  <li role="presentation"><a ui-sref="inicio">Inicio</a></li>
+  <li role="presentation">{{nombre}}</li>
+</ul>
+
+<div ui-view name="contenido">
+	
+</div>
