@@ -4,8 +4,8 @@
 		<table class="table table-hover table-responsive" align="center">
 			<tr>
 			    <th>ID</th>
-			    <th>NOMBRE</th> 
-			    <th>PRECIO</th>
+			    <th style="position:absolute;left:275px">NOMBRE</th> 
+			    <th style="position:absolute;left:480px">PRECIO</th>
 			    
 			</tr>
 			<tr ng-repeat="producto in listado track by $index">
@@ -17,8 +17,8 @@
 				
 
 
-				<td> <button  class="miBotonUtn" ng-click="borrar(producto.id)"> Borrar </button> </td>
-				<td> <button class="miBotonUtn" ng-click="desplegarMod(producto)"> Modificar </button> </td>
+				<td> <button   ng-click="borrar(producto.id)" class="btn btn-default btn-primary"> Borrar </button> </td>
+				<td> <button ng-click="desplegarMod(producto)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>			 
 			    

@@ -7,7 +7,7 @@ angular.module('proyecto',
 .config(function ($stateProvider, $urlRouterProvider,$authProvider){
 
  
-$authProvider.loginUrl = 'Pagano.FINAL/servidor/php/auth.php'
+$authProvider.loginUrl = 'Pagano.FINAL/servidor/php/auth.php';
 $authProvider.tokenName = "final"
 $authProvider.tokenPrefix = "proyecto"
 $authProvider.authHeader = "data"

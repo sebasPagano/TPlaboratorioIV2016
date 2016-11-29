@@ -1,12 +1,8 @@
 angular
   .module('proyecto')
   .controller('abmAltaCtrl',function($scope,$http,FileUploader,$auth){
- 
-$scope.usuario = $auth.getPayload().usuarioLogueado;
 
-
-
-     
+    $scope.ConectadoAlta=$auth.isAuthenticated();
 
     $scope.alta = {};
 
@@ -15,7 +11,7 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
         var objetoUsuario = JSON.stringify($scope.alta);
         console.info(objetoUsuario);
 
-        $http.post("http://localhost:8080/Pagano.FINAL/ws1/usuario/" + objetoUsuario)
+        $http.post("http://localhost:8080/Pagano.FINAL/ws1/usuario" ,$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);

@@ -1,14 +1,54 @@
-<ul class="nav nav-pills">
-  <li role="presentation"><a ui-sref="abm.grilla()">Grilla</a></li>
+<!--<ul class="nav nav-pills">
+  <li role="presentation"><a ui-sref="abm.grilla()">Grilla</a></li>-->
   <!-- ng-if="usuario.tipo=='administrador'" -->
-  <li role="presentation"><a ui-sref="abm.alta()">Alta</a></li> 
+ <!-- <li role="presentation"><a ui-sref="abm.alta()">Alta</a></li> 
   <li role="presentation"><a ui-sref="abm.grillaProducto()">GrillaProductos</a></li>
   <li role="presentation"><a ui-sref="abm.altaProducto()">AltaProductos</a></li>
-  <li role="presentation"><a ng-click="logout()">LogOut</a></li>
-  <li role="presentation"><a ui-sref="inicio">Inicio</a></li>
-  <li role="presentation">{{nombre}}</li>
-</ul>
-
+  <li style="position:absolute;left:800px" role="presentation"><a ng-click="logout()">Cerrar Sesion</a></li>
+  <li style="position:absolute;left:1000px;top:10px" role="presentation">{{nombre}}</li>
+</ul>-->
+<!--<header>
+      <nav>
+        <ul id="menu">
+          <li><a href="">Inicio</a></li>
+          <li>Productos
+            <ul>
+              <li><a ui-sref="abm.altaProducto()">Alta</a></li>
+              <li><a ui-sref="abm.grillaProducto()">Lista</a></li>
+            </ul>  
+          </li>
+          <li><a href="">Usuarios</a></li>
+            <ul>
+              <li><a  ui-sref="abm.alta()">Alta</a></li>
+              <li><a ui-sref="abm.grilla()">Lista</a></li>
+            </ul>  
+          <li><a ng-click="logout()">Cerrar Sesion</a></li>
+        </ul>
+      </nav>
+</header>-->
+<div ng-if="Conectado==true">
+	<ul class="nav nav-pills" id="menu">
+	  <li role="presentation"><a href="">Productos</a>
+	    <ul>
+	      <li role="presentation"><a ui-sref="abm.altaProducto()">Alta</a></li>
+	      <li role="presentation" ><a ui-sref="abm.grillaProducto()">Lista</a></li>
+	    </ul>  
+	  </li>
+	  <li role="presentation"><a href="">Usuarios</a>
+	  	<ul>
+	  	<li role="presentation"><a  ui-sref="abm.alta()">Alta</a></li>
+	  	<li role="presentation"><a ui-sref="abm.grilla()">Lista</a></li>
+	  	</ul>
+	  </li>
+	  <li role="presentation"><a ng-click="logout()">Cerrar sesion</a></li>
+	  <li style="position:absolute;left:1000px;top:10px" role="presentation">{{nombre}}</li>
+	</ul>
+</div>
+<div ng-if="Conectado==false">
+	<ul class="nav nav-pills" id="menu">
+	  <li role="presentation"><a ui-sref="inicio()">Volver</a></li>
+	</ul>
+</div>
 <div ui-view name="contenido">
 	
 </div>

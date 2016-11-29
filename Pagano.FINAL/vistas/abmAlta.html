@@ -1,9 +1,9 @@
 	<div class="container">
 		<div class="page-header">
-			<center> <h1> Formulario de alta</h1>   </center>     
+			<center> <h1>Agregar Usuario</h1>   </center>     
 		</div>
 		<div class="CajaInicio animated bounceInRight">
-             <h1>Ingrese Usuario:</h1>
+             <h1>Ingrese Usuario</h1>
 
 			<form name="formAlta" align='center' enctype="multipart/form-data" >
 			 
@@ -11,12 +11,15 @@
 			<input type="text" ng-model="alta.correo" placeholder="ingrese correo" required/>
 			<input type="text" ng-model="alta.nombre" placeholder="Ingrese nombre" required> 
 			<input type="text" ng-model="alta.clave" placeholder="Ingrese password" required> 		
-			<select ng-model="alta.tipo" >
-			    	<option value="Administrador">Administrador</option>
-			    	<option value="Encargado">Encargado</option>
-			    	<option value="Empleado">Empleado</option>
-			    	<option value="Cliente">Cliente</option>
-		    </select>
+			<hidden ng-init="alta.tipo='Cliente'"></hidden>
+			<div ng-if="ConectadoAlta=='false'">
+				<select  ng-model="alta.tipo" required>
+				    	<option value="Administrador">Administrador</option>
+				    	<option value="Encargado">Encargado</option>
+				    	<option  value="Empleado">Empleado</option>
+				    	<option  value="Cliente">Cliente</option>
+			    </select>
+			</div>
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Agregar Usuario!</a>
 					

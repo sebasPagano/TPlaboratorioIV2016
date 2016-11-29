@@ -26,6 +26,7 @@ angular
             else{
                 console.info("Info isAuthenticated: ", $auth.isAuthenticated());
                 console.info("info no-login: ", $auth.getPayload());
+                console.info("Info response: ", response);
             }
         },
         function(err){

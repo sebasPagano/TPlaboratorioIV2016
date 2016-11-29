@@ -179,7 +179,7 @@ select{
   display:block;
   text-transform: capitalize;
   border:hidden;
-  width:100%;
+  width:110%;
   background:#f50056;
   margin:0 auto;
   margin-top:1%;
@@ -194,7 +194,7 @@ select{
   transition:background .3s;
   -webkit-transition:background .3s;
 }
-
+/*style=" display:inline;position:absolute;left:500px;width=30px"*/
 .MiBotonUTN:hover{
   background:#1BA045;
 }

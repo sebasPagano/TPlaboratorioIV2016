@@ -8,6 +8,7 @@
  */
 require 'vendor/autoload.php';
 require '../PHP/AccesoDatos.php';
+require '../PHP/Usuario.php';
 //require '../AccesoDatos.php';
 
 /**
@@ -54,22 +55,17 @@ $app->get('/usuario[/{id}[/{name}]]', function ($request, $response, $args) {
     return $response;
 });
 /* POST: Para crear recursos */
-$app->post('/usuario/{user}', function ($request, $response, $args) {
+$app->post('/usuario', function ($request, $response, $args){
 
-    
-    $usuario = json_decode($args["user"]);
+    //var_dump($request->getParsedBody());
+    $array = [];
+   
+    $usuario = $request->getParsedBody();
+    $array["rta"]= Usuario::Agregar2($usuario);
 
+  
 
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misusuarios (correo, nombre, clave, tipo)
-                VALUES (:correo, :nombre, :clave, :tipo)");
-    $consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-    $consulta->bindValue(":correo", $usuario->correo, PDO::PARAM_STR);
-    $consulta->bindValue(":clave", $usuario->clave, PDO::PARAM_STR);
-    $consulta->bindValue(":tipo", $usuario->tipo, PDO::PARAM_STR);
-    $consulta->execute();
-
-    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+    return  $response->write($array["rta"]);
 
 });
 

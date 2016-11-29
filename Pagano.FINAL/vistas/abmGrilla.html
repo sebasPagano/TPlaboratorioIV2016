@@ -3,9 +3,9 @@
 		<table class="table table-hover table-responsive">
 			<tr>
 				<th>ID</th>
-			    <th>EMAIL</th>
+			    <th style="position:absolute;left:250px">EMAIL</th>
 			    <th>NOMBRE</th>
-			    <th>TIPO</th>
+			    <th style="position:absolute;left:620px">TIPO</th>
 			</tr>
 			<tr ng-repeat="usuario in listado track by $index">
 				<td> {{usuario.id}} </td>
@@ -15,8 +15,8 @@
 				
 
 
-				<td> <button  class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
-				<td> <button ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+				<td> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
+				<td> <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
 
 			</tr>			 
 			    

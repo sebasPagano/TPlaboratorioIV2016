@@ -1,4 +1,5 @@
 <?php 
+//require 'AccesoDatos.php';
 class Usuario{
 	//ATRIBUTOS
 	public $id;
@@ -80,6 +81,23 @@ class Usuario{
 		$idAgregado = $conexion->lastInsertId();
 		return $idAgregado;
 	}
+
+		public static function Agregar2($usuario){
+	//$conexion = self::CrearConexion();
+	 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+    $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO misusuarios (correo, nombre, clave, tipo)
+                VALUES (:correo, :nombre, :clave, :tipo)");
+  
+    $consulta->bindValue(":nombre", $usuario["nombre"], PDO::PARAM_STR);
+    $consulta->bindValue(":correo", $usuario["correo"], PDO::PARAM_STR);
+    $consulta->bindValue(":clave", $usuario["clave"], PDO::PARAM_STR);
+    $consulta->bindValue(":tipo", $usuario["tipo"], PDO::PARAM_STR);
+    $consulta->execute();
+    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+
+	}
+
+
 	public static function Modificar($usuario){
 		$conexion = self::CrearConexion();
 		$sql = "UPDATE usuarios
