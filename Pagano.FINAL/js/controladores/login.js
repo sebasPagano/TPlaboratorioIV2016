@@ -21,7 +21,7 @@ angular
                 console.info("Info isAuthenticated: ", $auth.isAuthenticated());
                 console.info("Info getPayload: ", $auth.getPayload());
                 console.info("Info response: ", response);
-                $state.go('abm.grillaProducto');
+                $state.go('abm.bienvenido');
             }
             else{
                 console.info("Info isAuthenticated: ", $auth.isAuthenticated());

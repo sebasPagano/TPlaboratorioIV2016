@@ -1,10 +1,29 @@
 angular
   .module('proyecto')
-  .controller('abmGrillaProductoCtrl',function($scope,$http,$auth){
+  .controller('abmGrillaProductoCtrl',function($scope,FileUploader,$http,$auth){
 
     $scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
+
+    $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
+    $scope.uploader.queueLimit = 10;
+
+  $scope.cargar = function(){
+        /** llamo a la funcion uploadAll para cargar toda la cola de archivos **/
+        $scope.uploader.uploadAll();
+        /** agrego mi funcionalidad **/
+    }
+
+            $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
+          console.info('onErrorItem', fileItem, response, status, headers);
+      };
+
+      $scope.uploader.onCompleteAll = function() {
+          console.info('Se cargo con exito');
+      };
+
+
 
     $scope.usuario = $auth.getPayload().usuarioLogueado;
 
@@ -36,19 +55,21 @@ angular
         });
     }
 
-    $scope.desplegarMod = function (voto){
+    $scope.desplegarMod = function (producto){
 
-        $scope.modificar = voto;
+        $scope.modificar = producto;
         $scope.modo = true;
 
-        $scope.modificar.nombre = voto.nombre;
+        $scope.modificar.nombre = producto.nombre;
+        
     }
 
     $scope.actualizar = function(){
 
-        $objetoUsuario = JSON.stringify($scope.modificar);
-
-        $http.put("http://localhost:8080/Pagano.FINAL/ws1/producto/" + $objetoUsuario)
+        //$objetoUsuario = JSON.stringify($scope.modificar);
+        $scope.modificar.foto = $scope.uploader.queue[0].file.name;
+        
+        $http.put("http://localhost:8080/Pagano.FINAL/ws1/productoM",$scope.modificar)
             .then(function (respuesta){
 
                 console.info("Modificado: ", respuesta.data);

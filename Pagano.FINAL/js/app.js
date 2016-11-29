@@ -38,6 +38,17 @@ $authProvider.authHeader = "data"
                 controller: 'abmMenuCtrl'
             })
 
+        .state('abm.bienvenido', {
+            url: '/bienvenido',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/bienvenido.html',
+                    controller: 'BienvenidoCtrl'
+                }
+            }
+        })
+
+
  	// pagina de alta	 
       .state('abm.alta', {
                 url: '/alta',

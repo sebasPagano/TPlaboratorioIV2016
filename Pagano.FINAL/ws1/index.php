@@ -9,6 +9,7 @@
 require 'vendor/autoload.php';
 require '../PHP/AccesoDatos.php';
 require '../PHP/Usuario.php';
+require '../PHP/Producto.php';
 //require '../AccesoDatos.php';
 
 /**
@@ -36,7 +37,7 @@ $app = new Slim\App();
 * DELETE: Para eliminar recursos
 *
 *  GET: Para consultar y leer recursos */
-
+/*
 $app->post('/usuarios/foto', function ($request, $response, $args) {
     
     
@@ -53,7 +54,7 @@ $app->get('/usuario[/{id}[/{name}]]', function ($request, $response, $args) {
     $response->write("Datos usuario ");
     var_dump($args);
     return $response;
-});
+});*/
 /* POST: Para crear recursos */
 $app->post('/usuario', function ($request, $response, $args){
 
@@ -61,7 +62,7 @@ $app->post('/usuario', function ($request, $response, $args){
     $array = [];
    
     $usuario = $request->getParsedBody();
-    $array["rta"]= Usuario::Agregar2($usuario);
+    $array["rta"]= Usuario::Agregar($usuario);
 
   
 
@@ -70,21 +71,14 @@ $app->post('/usuario', function ($request, $response, $args){
 });
 
 // /* PUT: Para editar recursos */
-$app->put('/usuario/{objeto}', function ($request, $response, $args) {
+$app->put('/usuarioM', function ($request, $response, $args) {
     
-    $usuario = json_decode($args["objeto"]);
+ 
+    $array = [];
+    $usuario = $request->getParsedBody();
+    $array["rta"]= Usuario::Modificar($usuario);
 
-            $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-            $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misusuarios
-                SET correo = :correo, nombre = :nombre, clave = :clave, tipo = :tipo
-                WHERE id = :id");
-            $consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-            $consulta->bindValue(":correo", $usuario->correo, PDO::PARAM_STR);
-            $consulta->bindValue(":clave", $usuario->clave, PDO::PARAM_STR);
-            $consulta->bindValue(":tipo", $usuario->tipo, PDO::PARAM_STR);
-            $consulta->bindValue(":id", $usuario->id, PDO::PARAM_INT);
-            return $consulta->execute();
-
+    return  $response->write($array["rta"]+"xd");
      
 
 });
@@ -93,22 +87,19 @@ $app->put('/usuario/{objeto}', function ($request, $response, $args) {
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
 
     $id = $args["id"];
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misusuarios WHERE id = :id ");
-    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
-    $consulta->execute();
+    $array = [];
+    $array["rta"]= Usuario::Eliminar($id);
 
-    return $consulta->rowCount();
+    return  $response->write($array["rta"]);
+
     
 });
 
 $app->get('/users', function ($request, $response, $args) {
 
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios ");
-    $consulta->execute();
-    $arrVotos = json_encode($consulta->fetchAll());
-    return $arrVotos; 
+    $array=[];
+    $array["rta"]= Usuario::TraerTodosLosUsuarios();
+    return  $response->write($array["rta"]);
 
     
 });
@@ -117,45 +108,36 @@ $app->get('/users', function ($request, $response, $args) {
 
 $app->get('/productos', function ($request, $response, $args) {
 
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos ");
-    $consulta->execute();
-    $arrVotos = json_encode($consulta->fetchAll());
-    return $arrVotos; 
+    $array=[];
+    $array["rta"]= Producto::TraerTodosLosProductos();
+    return  $response->write($array["rta"]);
+
 
     
 });
 //agregar producto
-$app->post('/producto/{prod}', function ($request, $response, $args) {
+$app->post('/producto', function ($request, $response, $args) {
 
-    
-    $producto = json_decode($args["prod"]);
+    $array = [];
+    $producto = $request->getParsedBody();
+    $array["rta"]= Producto::Agregar($producto);
 
 
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misproductos (nombre, precio)
-                VALUES (:nombre, :precio)");
-    $consulta->bindValue(":nombre", $producto->nombre, PDO::PARAM_STR);
-    $consulta->bindValue(":precio", $producto->precio, PDO::PARAM_STR);
-    $consulta->execute();
+    return  $response->write($array["rta"]);
 
-    return $objetoAccesoDato->RetornarUltimoIdInsertado();
 
 });
 
 //modificar producto
 
-$app->put('/producto/{objeto}', function ($request, $response, $args) {
-    
-    $producto = json_decode($args["objeto"]);
+$app->put('/productoM', function ($request, $response, $args) {
 
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misproductos
-        SET nombre = :nombre, precio = :precio WHERE id = :id");
-    $consulta->bindValue(":nombre", $producto->nombre, PDO::PARAM_STR);
-    $consulta->bindValue(":precio", $producto->precio, PDO::PARAM_STR);
-    $consulta->bindValue(":id", $producto->id, PDO::PARAM_INT);
-    return $consulta->execute();
+    $array = [];
+    $producto = $request->getParsedBody();
+    $array["rta"]= Producto::Modificar($producto);
+
+
+    return  $response->write($array["rta"]);
 
      
 
@@ -166,13 +148,13 @@ $app->put('/producto/{objeto}', function ($request, $response, $args) {
 $app->delete('/producto/{id}', function ($request, $response, $args) {
 
     $id = $args["id"];
-    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misproductos WHERE id = :id ");
-    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
-    $consulta->execute();
+    $array = [];
+    $producto = $request->getParsedBody();
+    $array["rta"]= Producto::Eliminar($id);
 
-    return $consulta->rowCount();
-    
+
+    return  $response->write($array["rta"]);
+
 });
 /**
  * Step 4: Run the Slim application

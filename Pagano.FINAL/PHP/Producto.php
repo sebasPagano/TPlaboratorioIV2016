@@ -1,24 +1,23 @@
 <?php 
-class Usuario{
+class Producto{
 	//ATRIBUTOS
 	public $id;
 	public $nombre;
-	public $email;
-	public $perfil;
-	public $password;
+	public $precio;
+
 	//CONSTRUCTOR
 	public function __construct($id = NULL)
 	{
 		if($id != NULL){
-			$usuario = self::TraerUnUsuarioPorId($id);
-			$this->id = $usuario->id;
-			$this->nombre = $usuario->nombre;
-			$this->email = $usuario->email;
-			$this->perfil = $usuario->perfil;
+			$producto = self::TraerUnUsuarioPorId($id);
+			$this->id = $producto->id;
+			$this->nombre = $producto->nombre;
+			$this->nombre = $producto->nombre;
+
 		}
 	}
 	//MÉTODOS
-	public static function TraerUnUsuarioPorId($id){
+	public static function TraerProductoPorId($id){
 		$conexion = self::CrearConexion();
 		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
 				FROM usuarios U
@@ -29,81 +28,46 @@ class Usuario{
 		$usuario = $consulta->fetchObject('Usuario');
 		return $usuario;
 	}
-	public static function TraerTodosLosUsuarios(){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
-				FROM usuarios U";
-		$consulta = $conexion->prepare($sql);
-		$consulta->execute();
-		$usuarios = $consulta->fetchall(PDO::FETCH_CLASS, 'Usuario');
-		return $usuarios;
-	}
-	public static function TraerUsuarioLogueado($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
-				FROM usuarios U
-				WHERE U.email = :email AND U.password = :pass AND U.nombre =:nombre";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":email", $usuario->usuario, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->clave, PDO::PARAM_STR);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->execute();
-		$usuarioLogueado = $consulta->fetchObject('Usuario');
-		return $usuarioLogueado;
-	}
-
-		public static function TraerUsuarioLogueado2($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id,  U.correo,U.nombre, U.tipo
-				FROM misusuarios U
-				WHERE U.correo = :correo AND U.clave = :clave AND U.nombre =:nombre";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":correo", $usuario->correo, PDO::PARAM_STR);
-		$consulta->bindValue(":clave", $usuario->clave, PDO::PARAM_STR);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->execute();
-		$usuarioLogueado = $consulta->fetchObject('Usuario');
-		return $usuarioLogueado;
+	public static function TraerTodosLosProductos(){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos ");
+	    $consulta->execute();
+	    $arrProductos = json_encode($consulta->fetchAll());
+	    return $arrProductos; 
 	}
 
 
-	public static function Agregar($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "INSERT INTO usuarios (nombre, email, password, perfil)
-				VALUES (:nombre, :email, :pass, :perfil)";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(":email", $usuario->email, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->pass, PDO::PARAM_STR);
-		$consulta->bindValue(":perfil", $usuario->perfil, PDO::PARAM_STR);
-		$consulta->execute();
-		$idAgregado = $conexion->lastInsertId();
-		return $idAgregado;
+	public static function Agregar($producto){
+
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misproductos (nombre, precio,foto)
+	                VALUES (:nombre, :precio,:foto)");
+	    $consulta->bindValue(":nombre", $producto["nombre"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_STR);
+	    $consulta->bindValue(":foto", $producto["foto"], PDO::PARAM_STR);
+	    $consulta->execute();
+
+	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
-	public static function Modificar($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "UPDATE usuarios
-				SET nombre = :nombre, email = :email, password = :pass, perfil = :perfil
-				WHERE id = :id";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(":email", $usuario->email, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->pass, PDO::PARAM_STR);
-		$consulta->bindValue(":perfil", $usuario->perfil, PDO::PARAM_STR);
-		$consulta->bindValue(":id", $usuario->id, PDO::PARAM_INT);
-		$consulta->execute();
-		$cantidad = $consulta->rowCount();
-		return $cantidad;
+
+	public static function Modificar($producto){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misproductos
+	        SET nombre = :nombre, precio = :precio, foto = :foto WHERE id = :id");
+	    $consulta->bindValue(":nombre", $producto["nombre"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_STR);
+	    $consulta->bindValue(":foto", $producto["foto"], PDO::PARAM_STR);
+	    $consulta->bindValue(":id", $producto["id"], PDO::PARAM_INT);
+	    return $consulta->execute();
 	}
+
 	public static function Eliminar($id){
-		$conexion = self::CrearConexion();
-		$sql = "DELETE FROM usuarios
-				WHERE id = :id";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":id", $id, PDO::PARAM_INT);
-		$consulta->execute();
-		$cantidad = $consulta->rowCount();
-		return $cantidad;
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misproductos WHERE id = :id ");
+	    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
+	    $consulta->execute();
+
+	    return $consulta->rowCount();
 	}
 	public static function CrearConexion(){
 		try

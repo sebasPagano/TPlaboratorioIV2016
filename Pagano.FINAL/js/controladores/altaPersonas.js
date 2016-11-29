@@ -8,9 +8,9 @@ angular
 
     $scope.guardar = function(){
 
-        var objetoUsuario = JSON.stringify($scope.alta);
+       /* var objetoUsuario = JSON.stringify($scope.alta);
         console.info(objetoUsuario);
-
+        */
         $http.post("http://localhost:8080/Pagano.FINAL/ws1/usuario" ,$scope.alta)
             .then(function (respuesta){
 

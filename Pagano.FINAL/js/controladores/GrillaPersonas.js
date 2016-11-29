@@ -46,7 +46,7 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
 
         $objetoUsuario = JSON.stringify($scope.modificar);
 
-        $http.put("http://localhost:8080/Pagano.FINAL/ws1/usuario/" + $objetoUsuario)
+        $http.put("http://localhost:8080/Pagano.FINAL/ws1/usuarioM",$scope.modificar)
             .then(function (respuesta){
 
                 console.info("Modificado: ", respuesta.data);

@@ -12,14 +12,14 @@
 			<input type="text" ng-model="alta.nombre" placeholder="Ingrese nombre" required> 
 			<input type="text" ng-model="alta.clave" placeholder="Ingrese password" required> 		
 			<hidden ng-init="alta.tipo='Cliente'"></hidden>
-			<div ng-if="ConectadoAlta=='false'">
+			<span ng-if="ConectadoAlta==true">
 				<select  ng-model="alta.tipo" required>
 				    	<option value="Administrador">Administrador</option>
 				    	<option value="Encargado">Encargado</option>
 				    	<option  value="Empleado">Empleado</option>
 				    	<option  value="Cliente">Cliente</option>
 			    </select>
-			</div>
+			</span>
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Agregar Usuario!</a>
 					

@@ -31,26 +31,11 @@ class Usuario{
 		return $usuario;
 	}
 	public static function TraerTodosLosUsuarios(){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
-				FROM usuarios U";
-		$consulta = $conexion->prepare($sql);
-		$consulta->execute();
-		$usuarios = $consulta->fetchall(PDO::FETCH_CLASS, 'Usuario');
-		return $usuarios;
-	}
-	public static function TraerUsuarioLogueado($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
-				FROM usuarios U
-				WHERE U.email = :email AND U.password = :pass AND U.nombre =:nombre";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":email", $usuario->usuario, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->clave, PDO::PARAM_STR);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->execute();
-		$usuarioLogueado = $consulta->fetchObject('Usuario');
-		return $usuarioLogueado;
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misusuarios ");
+	    $consulta->execute();
+	    $arrUser = json_encode($consulta->fetchAll());
+	    return $arrUser; 
 	}
 
 			public static function TraerUsuarioLogueado2($usuario){
@@ -68,22 +53,9 @@ class Usuario{
 	}
 
 
-	public static function Agregar($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "INSERT INTO usuarios (nombre, email, password, perfil)
-				VALUES (:nombre, :email, :pass, :perfil)";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(":email", $usuario->email, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->pass, PDO::PARAM_STR);
-		$consulta->bindValue(":perfil", $usuario->perfil, PDO::PARAM_STR);
-		$consulta->execute();
-		$idAgregado = $conexion->lastInsertId();
-		return $idAgregado;
-	}
 
-		public static function Agregar2($usuario){
-	//$conexion = self::CrearConexion();
+	public static function Agregar($usuario){
+
 	 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
     $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO misusuarios (correo, nombre, clave, tipo)
                 VALUES (:correo, :nombre, :clave, :tipo)");
@@ -98,31 +70,32 @@ class Usuario{
 	}
 
 
+
 	public static function Modificar($usuario){
-		$conexion = self::CrearConexion();
-		$sql = "UPDATE usuarios
-				SET nombre = :nombre, email = :email, password = :pass, perfil = :perfil
-				WHERE id = :id";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":nombre", $usuario->nombre, PDO::PARAM_STR);
-		$consulta->bindValue(":email", $usuario->email, PDO::PARAM_STR);
-		$consulta->bindValue(":pass", $usuario->pass, PDO::PARAM_STR);
-		$consulta->bindValue(":perfil", $usuario->perfil, PDO::PARAM_STR);
-		$consulta->bindValue(":id", $usuario->id, PDO::PARAM_INT);
-		$consulta->execute();
-		$cantidad = $consulta->rowCount();
-		return $cantidad;
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misusuarios
+        SET correo = :correo, nombre = :nombre, clave = :clave, tipo = :tipo
+        WHERE id = :id");
+    $consulta->bindValue(":nombre", $usuario["nombre"], PDO::PARAM_STR);
+    $consulta->bindValue(":correo", $usuario["correo"], PDO::PARAM_STR);
+    $consulta->bindValue(":clave", $usuario["clave"], PDO::PARAM_STR);
+    $consulta->bindValue(":tipo", $usuario["tipo"], PDO::PARAM_STR);
+    $consulta->bindValue(":id", $usuario["id"], PDO::PARAM_INT);
+    return $consulta->execute();
+
+
 	}
+
 	public static function Eliminar($id){
-		$conexion = self::CrearConexion();
-		$sql = "DELETE FROM usuarios
-				WHERE id = :id";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":id", $id, PDO::PARAM_INT);
-		$consulta->execute();
-		$cantidad = $consulta->rowCount();
-		return $cantidad;
+
+    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misusuarios WHERE id = :id ");
+    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
+    $consulta->execute();
+
+    return $consulta->rowCount();
 	}
+	
 	public static function CrearConexion(){
 		try
 		{
