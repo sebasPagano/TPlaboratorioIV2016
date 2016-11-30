@@ -104,6 +104,8 @@ $app->get('/users', function ($request, $response, $args) {
     
 });
 
+
+
 //PRODUCTOS
 
 $app->get('/productos', function ($request, $response, $args) {
@@ -156,6 +158,32 @@ $app->delete('/producto/{id}', function ($request, $response, $args) {
     return  $response->write($array["rta"]);
 
 });
+
+//Buscar producto por id
+$app->get('/productos/{id}', function ($request, $response, $args) {
+
+    $id = $args["id"];
+    $array = [];
+    $array["rta"]= Producto::TraerProductoPorId($id);
+    return  $response->write($array["rta"]);   
+});
+
+$app->post('/oferta', function ($request, $response, $args) {
+
+    $array = [];
+    $oferta = $request->getParsedBody();
+
+    $array["rta"]= Producto::AgregarOferta($oferta);
+
+
+    return  $response->write($array["rta"]);
+
+
+});
+
+
+
+
 /**
  * Step 4: Run the Slim application
  *

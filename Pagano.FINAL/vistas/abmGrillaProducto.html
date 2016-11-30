@@ -1,5 +1,5 @@
 	<div class="container">
-	
+		<span>Aclaracion: Pizzerias Argenta S.R.L. Solo trabaja con porciones grandes.</span>
 		<div ng-if="!modo">
 		<table class="table table-hover table-responsive" align="center">
 			<tr>
@@ -11,7 +11,7 @@
 			</tr>
 			<tr ng-repeat="producto in listado track by $index">
 
-				<td> {{producto.id}} </td>
+				<td> {{producto.id_producto}} </td>
 				<td> {{producto.nombre}} </td>
 				<td> {{producto.precio}} </td>
 				<td><img width="100" height="100" src="img/{{producto.foto}}"></img></td>
@@ -19,7 +19,7 @@
 				
 
 
-				<td> <button   ng-click="borrar(producto.id)" class="btn btn-default btn-primary"> Borrar </button> </td>
+				<td> <button   ng-click="borrar(producto.id_producto)" class="btn btn-default btn-primary"> Borrar </button> </td>
 				<td> <button ng-click="desplegarMod(producto)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>			 

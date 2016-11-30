@@ -4,7 +4,9 @@
 {
     background-image:url(../img/FondoInicio.jpeg);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: static;
+    background-size: cover;
+
 
 
 }

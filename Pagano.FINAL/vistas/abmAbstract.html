@@ -30,19 +30,41 @@
 	<ul class="nav nav-pills" id="menu">
 	  <li role="presentation"><a href="">Productos</a>
 	    <ul>
-	      <li role="presentation"><a ui-sref="abm.altaProducto()">Alta</a></li>
-	      <li role="presentation" ><a ui-sref="abm.grillaProducto()">Lista</a></li>
+	      <li role="presentation"><a ui-sref="menu.altaProducto()">Agregar Producto</a></li>
+	      <li role="presentation" ><a ui-sref="menu.grillaProducto()">Lista</a></li>
 	    </ul>  
 	  </li>
+
 	  <li role="presentation"><a href="">Usuarios</a>
 	  	<ul>
-	  	<li role="presentation"><a  ui-sref="abm.alta()">Alta</a></li>
-	  	<li role="presentation"><a ui-sref="abm.grilla()">Lista</a></li>
+	  	<li role="presentation"><a  ui-sref="menu.alta()">Agregar Usuario</a></li>
+	  	<li role="presentation"><a ui-sref="menu.grilla()">Lista</a></li>
 	  	</ul>
 	  </li>
+    <li role="presentation"><a href="" >Sucursales</a>
+      <ul>
+      <li role="presentation"><a ui-sref="menu.sucursalAvellaneda()" >Avellaneda</a></li>
+      <li role="presentation"><a ui-sref="menu.sucursalLanus()">Lanus</a></li>
+      <li role="presentation"><a ui-sref="menu.sucursalLomas()">Lomas</a></li>
+      </ul>
+    </li>
+    <li role="presentation"><a href="">Ofertas</a>
+      <ul>
+      <li role="presentation"><a ui-sref="menu.ofertasAlta()" >Agregar una oferta</a></li>
+      <li role="presentation"><a ui-sref="menu.ofertasGrilla()" >Lista</a></li>
+
+      </ul>
+    </li>
+    <li role="presentation"><a href="">Pedidos</a>
+      <ul>
+      <li role="presentation"><a ui-sref="menu.pedidosAlta()" >Hacer un pedido</a></li>
+      <li role="presentation"><a ui-sref="menu.pedidosGrilla()" >Lista</a></li>
+      </ul>
+    </li>
 	  <li role="presentation"><a ng-click="logout()">Cerrar sesion</a></li>
 	  <li style="position:absolute;left:92%;top:1%" role="presentation">{{nombre}}</li>
 	</ul>
+
 </div>
 <div ng-if="Conectado==false">
 	<ul class="nav nav-pills" id="menu">

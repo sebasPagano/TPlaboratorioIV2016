@@ -17,17 +17,7 @@ class Producto{
 		}
 	}
 	//MÉTODOS
-	public static function TraerProductoPorId($id){
-		$conexion = self::CrearConexion();
-		$sql = "SELECT U.id, U.nombre, U.email, U.perfil
-				FROM usuarios U
-				WHERE U.id = :id";
-		$consulta = $conexion->prepare($sql);
-		$consulta->bindValue(":id", $id, PDO::PARAM_INT);
-		$consulta->execute();
-		$usuario = $consulta->fetchObject('Usuario');
-		return $usuario;
-	}
+
 	public static function TraerTodosLosProductos(){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos ");
@@ -43,7 +33,7 @@ class Producto{
 	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misproductos (nombre, precio,foto)
 	                VALUES (:nombre, :precio,:foto)");
 	    $consulta->bindValue(":nombre", $producto["nombre"], PDO::PARAM_STR);
-	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":foto", $producto["foto"], PDO::PARAM_STR);
 	    $consulta->execute();
 
@@ -53,22 +43,57 @@ class Producto{
 	public static function Modificar($producto){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misproductos
-	        SET nombre = :nombre, precio = :precio, foto = :foto WHERE id = :id");
+	        SET nombre = :nombre, precio = :precio, foto = :foto WHERE id_producto = :id");
 	    $consulta->bindValue(":nombre", $producto["nombre"], PDO::PARAM_STR);
-	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $producto["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":foto", $producto["foto"], PDO::PARAM_STR);
-	    $consulta->bindValue(":id", $producto["id"], PDO::PARAM_INT);
+	    $consulta->bindValue(":id", $producto["id_producto"], PDO::PARAM_INT);
 	    return $consulta->execute();
 	}
 
+
 	public static function Eliminar($id){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misproductos WHERE id = :id ");
+	    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misproductos WHERE id_producto = :id ");
 	    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
 	    $consulta->execute();
 
 	    return $consulta->rowCount();
 	}
+
+		public static function TraerProductoPorId($id){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misproductos WHERE id_producto= :id");
+	    $consulta->bindValue(":id", $id, PDO::PARAM_STR);
+	    $consulta->execute();
+	   // $arrProductos = json_encode($consulta->fetchAll());
+	   // return $arrProductos; 
+	    $producto = json_encode($consulta->fetchObject('Producto'));
+		return $producto;
+	}
+
+		public static function AgregarOferta($oferta){
+
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misofertas (nombre, costo,fecha)
+	                VALUES (:nombre, :costo,:fecha)");
+	    $consulta->bindValue(":nombre", $oferta["nombre"], PDO::PARAM_STR);
+	    $consulta->bindValue(":costo", $oferta["costo"], PDO::PARAM_INT);
+	    $consulta->bindValue(":fecha", $oferta["fecha"], PDO::PARAM_STR);
+	   // $consulta->bindValue(":id", $producto["id_producto"], PDO::PARAM_STR);
+	    $consulta->execute();
+
+	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+	}
+/*
+		public static function TraerTodasLasOfertas(){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misofertas ");
+	    $consulta->execute();
+	    $arrProductos = json_encode($consulta->fetchAll());
+	    return $arrProductos; 
+	}
+*/
 	public static function CrearConexion(){
 		try
 		{

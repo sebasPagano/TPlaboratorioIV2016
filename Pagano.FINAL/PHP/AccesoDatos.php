@@ -24,6 +24,7 @@ class AccesoDatos
     
      public function RetornarUltimoIdInsertado()
     { 
+        
         return $this->objetoPDO->lastInsertId(); 
     }
  

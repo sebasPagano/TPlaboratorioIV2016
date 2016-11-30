@@ -1,7 +1,8 @@
 angular.module('proyecto',
     ['ui.router',
     'satellizer',
-    'angularFileUpload'
+    'angularFileUpload',
+    'ngMap'
 ])
 
 .config(function ($stateProvider, $urlRouterProvider,$authProvider){
@@ -31,14 +32,14 @@ $authProvider.authHeader = "data"
             })
 
     // navbar fija de ABM
-      .state('abm', {
-                url : '/abm',
+      .state('menu', {
+                url : '/menu',
                 abstract:true,
                 templateUrl : 'vistas/abmAbstract.html',
                 controller: 'abmMenuCtrl'
             })
 
-        .state('abm.bienvenido', {
+        .state('menu.bienvenido', {
             url: '/bienvenido',
             views: {
                 'contenido': {
@@ -48,9 +49,79 @@ $authProvider.authHeader = "data"
             }
         })
 
+        .state('menu.ofertasGrilla', {
+            url: '/ofertas',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/ofertas.html',
+                    controller: 'OfertasGrillaCtrl'
+                }
+            }
+        })
+      .state('menu.ofertasAlta', {
+            url: '/ofertasAlta',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/ofertasAlta.html',
+                    controller: 'OfertasAltaCtrl'
+                }
+            }
+        })
+        .state('menu.pedidosAlta', {
+            url: '/pedidosAlta',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/pedidosAlta.html',
+                    controller: 'PedidosAltaCtrl'
+                }
+            }
+        })
+        .state('menu.pedidosGrilla', {
+            url: '/pedidosGrilla',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/pedidosGrilla.html',
+                    controller: 'PedidosGrillaCtrl'
+                }
+            }
+        })
+
+
+        .state('menu.sucursalLanus', {
+            url: '/sucursal/Lanus',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/sucursalLanus.html',
+                    controller: 'SucursalLanusCtrl'
+                 }
+            }
+          
+        })
+
+        .state('menu.sucursalAvellaneda', {
+            url: '/sucursal/Avellaneda',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/sucursalAvellaneda.html',
+                    controller: 'SucursalAvellanedaCtrl'
+                 }
+            }
+          
+        })
+        .state('menu.sucursalLomas', {
+            url: '/sucursal/Lomas',
+            views: {
+                'contenido': {
+                    templateUrl: 'vistas/sucursalLomas.html',
+                    controller: 'SucursalLomasCtrl'
+                 }
+            }
+          
+        })
+
 
  	// pagina de alta	 
-      .state('abm.alta', {
+      .state('menu.alta', {
                 url: '/alta',
                 views: {
                     'contenido': {
@@ -61,7 +132,7 @@ $authProvider.authHeader = "data"
             })
 
     // pagina de grilla  
-      .state('abm.grilla', {
+      .state('menu.grilla', {
                 url: '/grilla',
                 views: {
                     'contenido': {
@@ -70,7 +141,7 @@ $authProvider.authHeader = "data"
                     }
                 }
             })
-            .state('abm.altaProducto', {
+            .state('menu.altaProducto', {
                 url: '/altaProducto',
                 views: {
                     'contenido': {
@@ -81,7 +152,7 @@ $authProvider.authHeader = "data"
             })
 
     // pagina de grilla  
-      .state('abm.grillaProducto', {
+      .state('menu.grillaProducto', {
                 url: '/grillaProducto',
                 views: {
                     'contenido': {

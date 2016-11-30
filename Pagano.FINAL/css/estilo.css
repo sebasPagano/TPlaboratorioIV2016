@@ -35,8 +35,8 @@ li.btn {
 }
 
 .table-hover>tbody>tr:hover {
-      background-color: #8387F1;
-       border-radius: 0px ;
+  background-color: #8387F1;
+  border-radius: 0px ;
 }
 .table-hover>tbody>tr>td {
      
