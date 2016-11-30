@@ -152,6 +152,14 @@ class Producto{
 	    return $arrProductos; 
 	}
 
+	public static function TraerTodosLosLocales(){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM mislocales ");
+	    $consulta->execute();
+	    $arrProductos = json_encode($consulta->fetchAll());
+	    return $arrProductos; 
+	}
+
 	public static function CrearConexion(){
 		try
 		{

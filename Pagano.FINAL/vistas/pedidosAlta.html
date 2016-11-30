@@ -12,7 +12,10 @@
 		    </select>
 			<input type="text" ng-model="alta.cantidad" placeholder="ingrese cantidad" required/>
 			<input type="date" ng-model="alta.fecha" placeholder="Ingrese nombre" required> 
-	
+
+			<span ng-if="usuario.tipo!='Cliente'" >
+			<input type="text" ng-model="alta.id" placeholder="Ingrese id del cliente" required> 
+			</span>
 			<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Solicitar Pedido!</a>
 				
 			</div>

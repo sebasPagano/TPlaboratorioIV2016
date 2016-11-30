@@ -247,6 +247,15 @@ $app->put('/pedidoM', function ($request, $response, $args) {
     
 });
 
+$app->get('/sucursales', function ($request, $response, $args) {
+
+    $array=[];
+    $array["rta"]= Producto::TraerTodosLosLocales();
+    return  $response->write($array["rta"]);
+
+
+});
+
 
 
 

@@ -4,7 +4,7 @@ angular
 
   $scope.usuario = $auth.getPayload().usuarioLogueado;
 
-  console.log($scope.usuario.id);
+  console.log($scope.usuario.tipo);
 $scope.listado=[];
   $scope.alta ={};
 
@@ -24,8 +24,10 @@ $scope.listado=[];
 
      $scope.guardar = function(){
      	
+      if($scope.usuario.tipo =="Cliente")
+      {
      	$scope.alta.id =$scope.usuario.id;
-
+      }
 
      	for(var i=0;i<$scope.listado.length;i++)
    		{

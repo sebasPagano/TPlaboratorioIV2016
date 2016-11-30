@@ -98,12 +98,12 @@ $authProvider.authHeader = "data"
           
         })
 
-        .state('menu.sucursalAvellaneda', {
-            url: '/sucursal/Avellaneda',
+        .state('menu.sucursalGrilla', {
+            url: '/sucursalGrilla',
             views: {
                 'contenido': {
-                    templateUrl: 'vistas/sucursalAvellaneda.html',
-                    controller: 'SucursalAvellanedaCtrl'
+                    templateUrl: 'vistas/sucursalGrilla.html',
+                    controller: 'SucursalGrillaCtrl'
                  }
             }
           

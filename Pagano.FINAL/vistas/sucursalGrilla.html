@@ -1,0 +1,60 @@
+<!--<div ng-if="Sucursal">
+    	<ng-map center="[{{latitud}} , {{longitud}}]" style="width:500px; height:500px;">
+   			<marker position ="[{{latitud}}, {{longitud}}]"></marker>
+    	</ng-map>
+</div>-->
+
+<div class="container">
+		<div ng-if="!modo">
+		<table class="table table-hover table-responsive">
+			<tr>
+				<th>ID</th>
+			    <th>LOCALIDAD</th>
+			    <th>DIRECCION</th>
+			   
+			</tr>
+			<tr ng-repeat="sucursal in listado track by $index">
+				<td> {{sucursal.id_Local}} </td>
+				<td> {{sucursal.localidad}} </td>
+				<td> {{sucursal.direccion}} </td>
+			
+				
+			<td> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="GPS(sucursal.latitud,sucursal.longitud)"> GPS </button> </td>
+
+				<td> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(sucursal.id_Local)"> Borrar </button> </td>
+				<td> <button class="btn btn-default btn-primary" ng-click="desplegarMod(sucursal)"> Modificar </button> </td>
+
+			</tr>			 
+			    
+		</table>
+		<div ng-if="Sucursal">
+    	<ng-map center="[{{latitud}} , {{longitud}}]" style="width:500px; height:500px;">
+   			<marker position ="[{{latitud}}, {{longitud}}]"></marker>
+    	</ng-map>
+		</div>
+
+		</div>
+
+			<div ng-if="modo">
+				<div class="page-header">
+			<center> <h1> Modificacion</h1>   </center>     
+				</div>
+
+
+				<form name="formAlta" class="tablas" enctype="multipart/form-data">
+				<input type="text" ng-model="modificar.correo" placeholder="ingrese correo" required/>
+				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
+				<input type="text" ng-model="modificar.clave" placeholder="Ingrese password" required> 		
+				<select ng-model="modificar.tipo" >
+			    	<option value="Administrador">Administrador</option>
+			    	<option value="Encargado">Encargado</option>
+			    	<option value="Empleado">Empleado</option>
+			    	<option value="Cliente">Cliente</option>
+			    </select>
+
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar usuario!</a>
+					
+				</div>
+			</div>
+
+			</form>
