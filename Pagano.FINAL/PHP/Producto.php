@@ -85,7 +85,7 @@ class Producto{
 
 	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
-/*
+
 		public static function TraerTodasLasOfertas(){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM misofertas ");
@@ -93,7 +93,27 @@ class Producto{
 	    $arrProductos = json_encode($consulta->fetchAll());
 	    return $arrProductos; 
 	}
-*/
+
+		public static function ModificarOferta($oferta){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misofertas
+	        SET nombre = :nombre, costo = :costo, fecha = :fecha WHERE id_oferta = :id");
+	    $consulta->bindValue(":nombre", $oferta["nombre"], PDO::PARAM_STR);
+	    $consulta->bindValue(":costo", $oferta["costo"], PDO::PARAM_INT);
+	    $consulta->bindValue(":fecha", $oferta["fecha"], PDO::PARAM_STR);
+	    $consulta->bindValue(":id", $oferta["id_oferta"], PDO::PARAM_INT);
+	    return $consulta->execute();
+	}
+
+		public static function EliminarOferta($id){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("DELETE  FROM misofertas WHERE id_oferta = :id ");
+	    $consulta->bindValue(':id',$id, PDO::PARAM_STR);
+	    $consulta->execute();
+
+	    return $consulta->rowCount();
+	}
+
 	public static function CrearConexion(){
 		try
 		{

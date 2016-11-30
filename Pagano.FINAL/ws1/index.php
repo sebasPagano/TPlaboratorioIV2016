@@ -181,6 +181,39 @@ $app->post('/oferta', function ($request, $response, $args) {
 
 });
 
+$app->get('/ofertas', function ($request, $response, $args) {
+
+    $array=[];
+    $array["rta"]= Producto::TraerTodasLasOfertas();
+    return  $response->write($array["rta"]);
+
+
+});
+
+$app->put('/ofertaM', function ($request, $response, $args) {
+
+    $array = [];
+    $oferta = $request->getParsedBody();
+    $array["rta"]= Producto::ModificarOferta($oferta);
+
+
+    return  $response->write($array["rta"]);
+
+    
+});
+
+$app->delete('/oferta/{id}', function ($request, $response, $args) {
+
+    $id = $args["id"];
+    $array = [];
+    $producto = $request->getParsedBody();
+    $array["rta"]= Producto::EliminarOferta($id);
+
+
+    return  $response->write($array["rta"]);
+
+});
+
 
 
 
