@@ -130,6 +130,20 @@ class Producto{
 	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
 
+	public static function ModificarPedido($pedido){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mispedidos
+	        SET descripcion = :descripcion, precio = :precio, cantidad = :cantidad,fecha = :fecha,id=:id,id_producto = :id_producto WHERE id_pedido = :id_pedido");
+	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
+	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
+	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
+	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
+	    $consulta->bindValue(":id_pedido", $pedido["id_pedido"], PDO::PARAM_INT);
+	   	$consulta->bindValue(":cantidad", $pedido["cantidad"], PDO::PARAM_INT);
+	    return $consulta->execute();
+	}
+
 	public static function TraerTodosLosPedidos(){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM mispedidos ");

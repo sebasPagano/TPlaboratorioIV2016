@@ -226,6 +226,27 @@ $app->post('/pedido', function ($request, $response, $args) {
 
 });
 
+$app->get('/pedidos', function ($request, $response, $args) {
+
+    $array=[];
+    $array["rta"]= Producto::TraerTodosLosPedidos();
+    return  $response->write($array["rta"]);
+
+
+});
+
+$app->put('/pedidoM', function ($request, $response, $args) {
+
+    $array = [];
+    $pedido = $request->getParsedBody();
+    $array["rta"]= Producto::ModificarPedido($pedido);
+
+
+    return  $response->write($array["rta"]);
+
+    
+});
+
 
 
 
