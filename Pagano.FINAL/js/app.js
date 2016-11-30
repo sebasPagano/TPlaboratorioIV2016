@@ -87,12 +87,12 @@ $authProvider.authHeader = "data"
         })
 
 
-        .state('menu.sucursalLanus', {
-            url: '/sucursal/Lanus',
+        .state('menu.sucursalAlta', {
+            url: '/sucursalAlta',
             views: {
                 'contenido': {
-                    templateUrl: 'vistas/sucursalLanus.html',
-                    controller: 'SucursalLanusCtrl'
+                    templateUrl: 'vistas/sucursalAlta.html',
+                    controller: 'SucursalAltaCtrl'
                  }
             }
           
@@ -108,6 +108,8 @@ $authProvider.authHeader = "data"
             }
           
         })
+
+
         .state('menu.sucursalLomas', {
             url: '/sucursal/Lomas',
             views: {

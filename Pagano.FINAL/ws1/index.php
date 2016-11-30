@@ -255,6 +255,15 @@ $app->get('/sucursales', function ($request, $response, $args) {
 
 
 });
+$app->post('/sucursal', function ($request, $response, $args) {
+
+    $array=[];
+    $Local = $request->getParsedBody();
+    $array["rta"]= Producto::AgregarLocal($Local);
+    return  $response->write($array["rta"]);
+
+
+});
 
 
 

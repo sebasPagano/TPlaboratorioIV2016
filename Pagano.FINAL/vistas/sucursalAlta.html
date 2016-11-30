@@ -1,0 +1,25 @@
+<div class="container">
+	<div class="page-header">
+		<center> <h1>Agregar Sucursal</h1>   </center>     
+	</div>
+	<div class="CajaInicio animated bounceInRight">
+         <h1>Ingrese datos sucursal</h1>
+
+		<form name="formAlta" align='center' enctype="multipart/form-data" >
+		 
+			
+		<input type="text" ng-model="alta.localidad" placeholder="ingrese localidad" required/>
+		<input type="text" ng-model="alta.direccion" placeholder="Ingrese direccion" required> 
+		<input type="text" ng-model="alta.latitud" placeholder="Ingrese latitud" required>
+		<input type="text" ng-model="alta.longitud" placeholder="Ingrese longitud" required> 	 		
+
+
+
+			<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Agregar Usuario!</a>
+				
+			</div>
+
+		</form>
+
+		</div>
+</div>

@@ -160,6 +160,20 @@ class Producto{
 	    return $arrProductos; 
 	}
 
+	public static function AgregarLocal($Local){
+
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mislocales (localidad, direccion , latitud, longitud)
+	                VALUES (:localidad, :direccion , :latitud, :longitud)");
+	    $consulta->bindValue(":localidad", $Local["localidad"], PDO::PARAM_STR);
+	    $consulta->bindValue(":direccion", $Local["direccion"], PDO::PARAM_STR);
+	    $consulta->bindValue(":latitud", $Local["latitud"], PDO::PARAM_STR);
+	    $consulta->bindValue(":longitud", $Local["longitud"], PDO::PARAM_STR);
+	    $consulta->execute();
+
+	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+	}
+
 	public static function CrearConexion(){
 		try
 		{

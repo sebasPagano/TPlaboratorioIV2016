@@ -18,19 +18,26 @@
 				<td> {{sucursal.localidad}} </td>
 				<td> {{sucursal.direccion}} </td>
 			
-				
-			<td> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="GPS(sucursal.latitud,sucursal.longitud)"> GPS </button> </td>
+			<div>
+			<td ng-if="!SucursalVer"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="GPS(sucursal.latitud,sucursal.longitud)"> GPS </button> </td>
+			</div>
 
-				<td> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(sucursal.id_Local)"> Borrar </button> </td>
-				<td> <button class="btn btn-default btn-primary" ng-click="desplegarMod(sucursal)"> Modificar </button> </td>
+
+			<div>
+			<td ng-if="SucursalVer"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OCULTAR()"> OCULTAR</button> </td>
+			</div>
+
+			
 
 			</tr>			 
 			    
 		</table>
-		<div ng-if="Sucursal">
+		<div ng-if="SucursalVer">
+		<center>
     	<ng-map center="[{{latitud}} , {{longitud}}]" style="width:500px; height:500px;">
    			<marker position ="[{{latitud}}, {{longitud}}]"></marker>
     	</ng-map>
+   		 </center>
 		</div>
 
 		</div>
