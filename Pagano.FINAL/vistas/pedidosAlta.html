@@ -1,4 +1,23 @@
-<div>
-asadkadjk xdADKIADADKADOA
+<div class="container">
+	<div class="page-header">
+		<center> <h1>Hacer pedido</h1>   </center>     
+	</div>
+	<div class="CajaInicio animated bounceInRight">
+         <h1>Ingrese pedido</h1>
 
+		<form name="formAlta" align='center' enctype="multipart/form-data" > 		
+ 		
+			<select  ng-model="alta.descripcion"  required>
+			    	<option ng-repeat="producto in listado track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
+		    </select>
+			<input type="text" ng-model="alta.cantidad" placeholder="ingrese cantidad" required/>
+			<input type="date" ng-model="alta.fecha" placeholder="Ingrese nombre" required> 
+	
+			<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Solicitar Pedido!</a>
+				
+			</div>
+
+		</form>
+
+		</div>
 </div>

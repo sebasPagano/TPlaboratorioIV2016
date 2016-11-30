@@ -4,7 +4,7 @@
 			<tr>
 			    <th>NOMBRE</th> 
 			    <th>COSTO</th>
-			    <th>FECHA</th>
+			    <th>FIN DE OFERTA</th>
 			    
 			</tr>
 			<tr ng-repeat="oferta in listado track by $index">
@@ -13,8 +13,6 @@
 				<td> {{oferta.costo}} </td>
 				<td> {{oferta.fecha}} </td>
 	
-
-				<td> <button   ng-click="borrar(oferta.id)" class="btn btn-default btn-primary"> Borrar </button> </td>
 				<td> <button ng-click="desplegarMod(oferta)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>			 

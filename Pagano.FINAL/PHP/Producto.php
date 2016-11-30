@@ -114,6 +114,30 @@ class Producto{
 	    return $consulta->rowCount();
 	}
 
+		public static function AgregarPedido($pedido){
+
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mispedidos (descripcion, precio ,cantidad, fecha, id, id_producto)
+	                VALUES (:descripcion,:precio,:cantidad,:fecha ,:id,:id_producto)");
+	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
+	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
+	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
+	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
+	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
+	   	$consulta->bindValue(":cantidad", $pedido["cantidad"], PDO::PARAM_INT);
+	    $consulta->execute();
+
+	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+	}
+
+	public static function TraerTodosLosPedidos(){
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("SELECT * FROM mispedidos ");
+	    $consulta->execute();
+	    $arrProductos = json_encode($consulta->fetchAll());
+	    return $arrProductos; 
+	}
+
 	public static function CrearConexion(){
 		try
 		{

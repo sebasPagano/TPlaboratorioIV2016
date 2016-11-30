@@ -214,6 +214,18 @@ $app->delete('/oferta/{id}', function ($request, $response, $args) {
 
 });
 
+$app->post('/pedido', function ($request, $response, $args) {
+
+    $array = [];
+    $pedido = $request->getParsedBody();
+    $array["rta"]= Producto::AgregarPedido($pedido);
+
+
+    return  $response->write($array["rta"]);
+
+
+});
+
 
 
 

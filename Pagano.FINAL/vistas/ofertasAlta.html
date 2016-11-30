@@ -6,11 +6,13 @@
              <h1>Ingrese la Oferta</h1>
 
 			<form name="formAlta" align='center' enctype="multipart/form-data" >
-			 
-			<input type="text" name="id_prod" ng-model="id_producto" placeholder="ingrese id del producto" required/>
-
-				<a class="btn btn-warning" name="buscar" ng-if="!formAlta.id_prod.$invalid" ng-click="Buscar(id_producto)" ><span class="glyphicon glyphicon-save">&nbsp;</span>Buscar</a>
-				<span>{{producto}}<span>
+			 <span>
+				<input type="text" name="id_prod" ng-model="id_producto" placeholder="ingrese id del producto" required/>
+					<a class="btn btn-warning" name="buscar" ng-if="!formAlta.id_prod.$invalid" ng-click="Buscar(id_producto)" >
+					<span>&nbsp;</span>Buscar
+					</a>
+			</span>
+			
 				<input type="text" ng-model="alta.nombre" placeholder="Ingrese nombre" required> 
 				<input type="text" ng-model="alta.costo" placeholder="Ingrese Costo" required> 
 				<input type="date" ng-model="alta.fecha"  required> 
