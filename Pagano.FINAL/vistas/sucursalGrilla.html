@@ -23,22 +23,44 @@
 			</div>
 
 
+
 			<div>
 			<td ng-if="SucursalVer==1 && SucursalId == sucursal.id_Local"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OCULTAR()"> OCULTAR</button> </td>
 			</div>
+
+			<td ng-if="VerOfertas==0" > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="Ofertas(sucursal.id_Local)"> OFERTAS </button> </td>
+
+			<td ng-if="VerOfertas==1 && IDLOCAL == sucursal.id_Local"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OcultarOFERTA()"> OCULTAR OFERTAS</button> </td>
+
+			<td > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="Fotos()"> FOTOS </button> </td>
+		
 
 			
 
 			</tr>			 
 			    
-		</table>
-		<div ng-if="SucursalVer==1">
-		<center>
-    	<ng-map center="[{{latitud}} , {{longitud}}]" style="width:500px; height:500px;">
-   			<marker position ="[{{latitud}}, {{longitud}}]"></marker>
-    	</ng-map>
-   		 </center>
-		</div>
+			</table>
+				<div ng-if="SucursalVer==1">
+				<center>
+		    	<ng-map center="[{{latitud}} , {{longitud}}]" style="width:500px; height:500px;">
+		   			<marker position ="[{{latitud}}, {{longitud}}]"></marker>
+		    	</ng-map>
+		   		 </center>
+				</div>
+
+			<table ng-if="VerOfertas==1 " class="table table-hover table-responsive">
+				<tr>
+					<th>NOMBRE</th>
+				    <th>COSTO</th>
+				    <th>FIN DE FECHA</th>
+				   
+				</tr>
+				<tr ng-repeat="oferta in listadoOferta track by $index">
+					<td ng-if="oferta.id_Local == IDLOCAL"> {{oferta.nombre}} </td>
+					<td ng-if="oferta.id_Local == IDLOCAL"> {{oferta.costo}} </td>
+					<td ng-if="oferta.id_Local == IDLOCAL"> {{oferta.fecha}} </td>
+				</tr>
+			</table>
 
 		</div>
 

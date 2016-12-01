@@ -6,7 +6,7 @@ angular
 	var f = new Date();
 	var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
 	console.log(fecha);
-
+ 
 	$scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;

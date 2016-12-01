@@ -4,6 +4,7 @@ angular
 
   	    $scope.mapa = {};
   	    $scope.SucursalVer = 0;
+  	       $scope.VerOfertas = 0;
    		 $scope.latitud = "-34.662189";
    		 $scope.longitud = "-58.364643";
 
@@ -31,7 +32,33 @@ angular
 	    $scope.OCULTAR = function()
 	    {
 	    $scope.SucursalVer = 0;
-	
+	    }
+
+	   	$scope.OcultarOFERTA = function()
+	    {
+	     $scope.VerOfertas = 0;
+	    }
+	    $scope.Ofertas = function(id)
+	    {
+	    $scope.VerOfertas = 1;
+	    $scope.IDLOCAL = id;
+
+	    $http.get("http://localhost:8080/Pagano.FINAL/ws1/ofertas").then(function (respuesta){
+
+	        $scope.listadoOferta = respuesta.data;
+	        
+	      
+
+	    },function(error){
+
+	        console.info("Error: ", error);
+
+	    });
+
+
+	    }
+	    $scope.Fotos = function()
+	    {
 
 	    }
 
