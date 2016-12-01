@@ -3,7 +3,10 @@ angular
   .controller('abmAltaCtrl',function($scope,$http,FileUploader,$auth){
 
     $scope.ConectadoAlta=$auth.isAuthenticated();
-
+    if($scope.ConectadoAlta==true)
+    {
+$scope.usuario = $auth.getPayload().usuarioLogueado;
+}
     $scope.alta = {};
 
     $scope.guardar = function(){

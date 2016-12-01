@@ -1,7 +1,7 @@
 angular
   .module('proyecto')
   .controller('abmGrillaCtrl',function($scope,$http,$auth){
-$scope.usuario = $auth.getPayload().usuarioLogueado;
+$scope.usuarioM = $auth.getPayload().usuarioLogueado;
     $scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
@@ -34,12 +34,13 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
         });
     }
 
-    $scope.desplegarMod = function (voto){
+    $scope.desplegarMod = function (persona){
 
-        $scope.modificar = voto;
+        $scope.modificar = persona;
         $scope.modo = true;
 
-        $scope.modificar.nombre = voto.nombre;
+        $scope.modificar.nombre = persona.nombre;
+        $scope.modificar.tipo = persona.tipo;
     }
 
     $scope.actualizar = function(){

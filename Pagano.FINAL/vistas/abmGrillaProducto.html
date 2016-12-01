@@ -19,8 +19,8 @@
 				
 
 
-				<td> <button   ng-click="borrar(producto.id_producto)" class="btn btn-default btn-primary"> Borrar </button> </td>
-				<td> <button ng-click="desplegarMod(producto)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<td ng-if="usuario.tipo!='Cliente'"> <button   ng-click="borrar(producto.id_producto)" class="btn btn-default btn-primary"> Borrar </button> </td>
+				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(producto)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>			 
 			    

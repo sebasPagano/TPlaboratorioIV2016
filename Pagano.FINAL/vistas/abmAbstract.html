@@ -28,14 +28,14 @@
 </header>-->
 <div ng-if="Conectado==true">
 	<ul class="nav nav-pills" id="menu">
-	  <li role="presentation"><a href="">Productos</a>
+	  <li role="presentation" ng-if="usuario.tipo!='Administrador'" ><a href="">Productos</a>
 	    <ul>
-	      <li role="presentation"><a ui-sref="menu.altaProducto()">Agregar Producto</a></li>
+	      <li ng-if="usuario.tipo!='Cliente'" role="presentation"><a ui-sref="menu.altaProducto()">Agregar Producto</a></li>
 	      <li role="presentation" ><a ui-sref="menu.grillaProducto()">Lista</a></li>
 	    </ul>  
 	  </li>
 
-	  <li role="presentation"><a href="">Usuarios</a>
+	  <li ng-if="usuario.tipo!='Cliente'" role="presentation"><a href="">Usuarios</a>
 	  	<ul>
 	  	<li role="presentation"><a  ui-sref="menu.alta()">Agregar Usuario</a></li>
 	  	<li role="presentation"><a ui-sref="menu.grilla()">Lista</a></li>
@@ -43,25 +43,25 @@
 	  </li>
     <li role="presentation"><a href="" >Sucursales</a>
       <ul>
-      <li role="presentation"><a ui-sref="menu.sucursalAlta()" >Agregar Sucursal</a></li>
+      <li ng-if="usuario.tipo=='Administrador'" role="presentation"><a ui-sref="menu.sucursalAlta()" >Agregar Sucursal</a></li>
       <li role="presentation"><a ui-sref="menu.sucursalGrilla()" >Lista</a></li>
       </ul>
     </li>
-    <li role="presentation"><a href="">Ofertas</a>
+    <li role="presentation" ng-if="usuario.tipo!='Administrador'" ><a href="">Ofertas</a>
       <ul>
-      <li role="presentation"><a ui-sref="menu.ofertasAlta()" >Agregar una oferta</a></li>
+      <li ng-if="usuario.tipo!='Cliente'" role="presentation"><a ui-sref="menu.ofertasAlta()" >Agregar una oferta</a></li>
       <li role="presentation"><a ui-sref="menu.ofertasGrilla()" >Lista</a></li>
 
       </ul>
     </li>
-    <li role="presentation"><a href="">Pedidos</a>
+    <li role="presentation" ng-if="usuario.tipo!='Administrador'"><a href="">Pedidos</a>
       <ul>
       <li role="presentation"><a ui-sref="menu.pedidosAlta()" >Hacer un pedido</a></li>
       <li role="presentation"><a ui-sref="menu.pedidosGrilla()" >Lista</a></li>
       </ul>
     </li>
 	  <li role="presentation"><a ng-click="logout()">Cerrar sesion</a></li>
-	  <li style="position:absolute;left:92%;top:1%" role="presentation">{{nombre}}</li>
+	  <li style="position:absolute;left:90%;top:1%" role="presentation">{{nombre}}</li>
 	</ul>
 
 </div>

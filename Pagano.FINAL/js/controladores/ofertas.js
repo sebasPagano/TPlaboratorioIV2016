@@ -2,7 +2,7 @@ angular
   .module('proyecto')
   .controller('OfertasGrillaCtrl',function($scope,$http,FileUploader,$auth){
 
-
+    $scope.usuario = $auth.getPayload().usuarioLogueado;
 	var f = new Date();
 	var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
 	console.log(fecha);

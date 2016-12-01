@@ -5,6 +5,7 @@ angular
     $scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
+    $scope.usuario = $auth.getPayload().usuarioLogueado;
 
     $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
     $scope.uploader.queueLimit = 10;

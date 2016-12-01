@@ -15,8 +15,8 @@
 				
 
 
-				<td ng-if="usuario.id>4"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
-				<td ng-if="usuario.id>4" > <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+				<td ng-if="usuario.id>4 &&usuarioM.tipo!='Empleado'"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
+				<td ng-if="usuario.id>4 && usuarioM.tipo!='Empleado'"> <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
 
 			</tr>			 
 			    
@@ -33,9 +33,8 @@
 				<input type="text" ng-model="modificar.correo" placeholder="ingrese correo" required/>
 				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
 				<input type="text" ng-model="modificar.clave" placeholder="Ingrese password" required> 		
-				<select ng-model="modificar.tipo" >
-			    	<option value="Administrador">Administrador</option>
-			    	<option value="Encargado">Encargado</option>
+				<select ng-model="modificar.tipo" ng-if="usuarioM.tipo!='Empleado'" >
+			    	<option value="Encargado" ng-if="usuarioM.tipo=='Administrador'">Encargado</option>
 			    	<option value="Empleado">Empleado</option>
 			    	<option value="Cliente">Cliente</option>
 			    </select>

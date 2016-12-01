@@ -12,7 +12,25 @@
 			    <th>ID_PRODUCTO</th>
 			    
 			</tr>
-			<tr ng-repeat="pedido in listado track by $index">
+			<tr ng-if="usuario.tipo=='Cliente'" ng-repeat="pedido in listado track by $index">
+
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.id_pedido}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.descripcion}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.precio}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.cantidad}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.fecha}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.estado}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.id}} </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.id_producto}} </td>
+
+				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
+
+				<td ng-if="pedido.estado!='pendiente'">  </td>
+
+				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<!-- ng-if="usuario.tipo!='comprador'" -->
+			</tr>		
+			<tr ng-if="usuario.tipo!='Cliente'" ng-repeat="pedido in listado track by $index">
 
 				<td> {{pedido.id_pedido}} </td>
 				<td> {{pedido.descripcion}} </td>
@@ -23,13 +41,13 @@
 				<td> {{pedido.id}} </td>
 				<td> {{pedido.id_producto}} </td>
 
-				<td ng-if="pedido.estado=='pendiente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
+				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
 
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
-				<td> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
-			</tr>			 
+			</tr>				 
 			    
 		</table>
 		</div>

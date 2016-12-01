@@ -2,6 +2,7 @@ angular
   .module('proyecto')
   .controller('PedidosGrillaCtrl',function($scope,$http,FileUploader,$auth){
 
+$scope.usuario = $auth.getPayload().usuarioLogueado;
   	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/pedidos")
     .then(function (respuesta){
 

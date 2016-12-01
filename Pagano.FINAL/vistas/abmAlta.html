@@ -12,11 +12,10 @@
 			<input type="text" ng-model="alta.nombre" placeholder="Ingrese nombre" required> 
 			<input type="text" ng-model="alta.clave" placeholder="Ingrese password" required> 		
 			<hidden ng-init="alta.tipo='Cliente'"></hidden>
-			<span ng-if="ConectadoAlta==true">
+			<span ng-if="ConectadoAlta==true && usuario.tipo!='Empleado'">
 				<select  ng-model="alta.tipo" required>
-				    	<option value="Administrador">Administrador</option>
-				    	<option value="Encargado">Encargado</option>
-				    	<option  value="Empleado">Empleado</option>
+				    	<option ng-if="usuario.tipo=='Administrador'" value="Encargado">Encargado</option>
+				    	<option value="Empleado">Empleado</option>
 				    	<option  value="Cliente">Cliente</option>
 			    </select>
 			</span>
