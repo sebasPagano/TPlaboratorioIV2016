@@ -2,9 +2,6 @@ angular
   .module('proyecto')
   .controller('abmAltaProductoCtrl',function($scope,$http,FileUploader,$auth,$state){
  
-
-      
-
     $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
     $scope.uploader.queueLimit = 10;
 

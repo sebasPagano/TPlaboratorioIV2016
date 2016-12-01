@@ -11,12 +11,14 @@
 				<th>ID</th>
 			    <th>LOCALIDAD</th>
 			    <th>DIRECCION</th>
+		
 			   
 			</tr>
 			<tr ng-repeat="sucursal in listado track by $index">
 				<td> {{sucursal.id_Local}} </td>
 				<td> {{sucursal.localidad}} </td>
 				<td> {{sucursal.direccion}} </td>
+		
 			
 			<div>
 			<td ng-if="SucursalVer==0"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="GPS(sucursal.latitud,sucursal.longitud,sucursal.id_Local)"> GPS </button> </td>
@@ -32,7 +34,8 @@
 
 			<td ng-if="VerOfertas==1 && IDLOCAL == sucursal.id_Local"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OcultarOFERTA()"> OCULTAR OFERTAS</button> </td>
 
-			<td > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="Fotos()"> FOTOS </button> </td>
+			<td ng-if="VerFotos==0" > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="Fotos(sucursal.id_Local)"> FOTOS </button> </td>
+			<td ng-if="VerFotos==1  && SucursalIdFoto == sucursal.id_Local"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OcultarFotos()"> OCULTAR FOTOS</button> </td>
 		
 
 			
@@ -62,28 +65,18 @@
 				</tr>
 			</table>
 
+			<table ng-if="VerFotos==1 " class="table table-hover table-responsive">
+				<tr>
+					<th>FOTOS</th>
+				   
+				</tr>
+				<tr ng-repeat="sucursal in listado track by $index">
+					<td ng-if="sucursal.id_Local == SucursalIdFoto"> <img width="350" height="350" src="img/{{sucursal.foto1}}"></img></td>
+					<td ng-if="sucursal.id_Local == SucursalIdFoto"><img width="350" height="350" src="img/{{sucursal.foto2}}"></img> </td>
+					<td ng-if="sucursal.id_Local == SucursalIdFoto"> <img width="350" height="350" src="img/{{sucursal.foto3}}"></img></td>
+				</tr>
+			</table>
+
 		</div>
 
-			<div ng-if="modo">
-				<div class="page-header">
-			<center> <h1> Modificacion</h1>   </center>     
-				</div>
 
-
-				<form name="formAlta" class="tablas" enctype="multipart/form-data">
-				<input type="text" ng-model="modificar.correo" placeholder="ingrese correo" required/>
-				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
-				<input type="text" ng-model="modificar.clave" placeholder="Ingrese password" required> 		
-				<select ng-model="modificar.tipo" >
-			    	<option value="Administrador">Administrador</option>
-			    	<option value="Encargado">Encargado</option>
-			    	<option value="Empleado">Empleado</option>
-			    	<option value="Cliente">Cliente</option>
-			    </select>
-
-				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar usuario!</a>
-					
-				</div>
-			</div>
-
-			</form>

@@ -4,7 +4,8 @@ angular
 
   	    $scope.mapa = {};
   	    $scope.SucursalVer = 0;
-  	       $scope.VerOfertas = 0;
+  	     $scope.VerOfertas = 0;
+  	     $scope.VerFotos = 0;
    		 $scope.latitud = "-34.662189";
    		 $scope.longitud = "-58.364643";
 
@@ -57,9 +58,14 @@ angular
 
 
 	    }
-	    $scope.Fotos = function()
+	    $scope.Fotos = function(id)
 	    {
-
+	    	$scope.VerFotos = 1;
+	    	$scope.SucursalIdFoto = id;
+	    }
+	    $scope.OcultarFotos = function()
+	    {
+	     $scope.VerFotos = 0;
 	    }
 
 
