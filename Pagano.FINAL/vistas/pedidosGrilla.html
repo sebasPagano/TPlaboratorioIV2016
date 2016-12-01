@@ -7,6 +7,7 @@
 			    <th>PRECIO</th>
 			    <th>CANTIDAD</th>
 			   	<th>FECHA</th> 
+			   	<th>ESTADO</th>
 			    <th>ID</th>
 			    <th>ID_PRODUCTO</th>
 			    
@@ -18,8 +19,13 @@
 				<td> {{pedido.precio}} </td>
 				<td> {{pedido.cantidad}} </td>
 				<td> {{pedido.fecha}} </td>
+				<td> {{pedido.estado}} </td>
 				<td> {{pedido.id}} </td>
 				<td> {{pedido.id_producto}} </td>
+
+				<td ng-if="pedido.estado=='pendiente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
+
+				<td ng-if="pedido.estado!='pendiente'">  </td>
 
 				<td> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->

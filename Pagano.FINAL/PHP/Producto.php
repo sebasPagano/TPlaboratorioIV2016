@@ -75,11 +75,12 @@ class Producto{
 		public static function AgregarOferta($oferta){
 
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misofertas (nombre, costo,fecha)
-	                VALUES (:nombre, :costo,:fecha)");
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misofertas (nombre, costo,fecha,id_Local)
+	                VALUES (:nombre, :costo,:fecha,:id_Local)");
 	    $consulta->bindValue(":nombre", $oferta["nombre"], PDO::PARAM_STR);
 	    $consulta->bindValue(":costo", $oferta["costo"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $oferta["fecha"], PDO::PARAM_STR);
+	    $consulta->bindValue(":id_Local", $oferta["id_Local"], PDO::PARAM_INT);
 	   // $consulta->bindValue(":id", $producto["id_producto"], PDO::PARAM_STR);
 	    $consulta->execute();
 
@@ -97,11 +98,12 @@ class Producto{
 		public static function ModificarOferta($oferta){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE misofertas
-	        SET nombre = :nombre, costo = :costo, fecha = :fecha WHERE id_oferta = :id");
+	        SET nombre = :nombre, costo = :costo, fecha = :fecha, id_Local = :id_Local WHERE id_oferta = :id");
 	    $consulta->bindValue(":nombre", $oferta["nombre"], PDO::PARAM_STR);
 	    $consulta->bindValue(":costo", $oferta["costo"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $oferta["fecha"], PDO::PARAM_STR);
 	    $consulta->bindValue(":id", $oferta["id_oferta"], PDO::PARAM_INT);
+	    $consulta->bindValue(":id_Local", $oferta["id_Local"], PDO::PARAM_INT);
 	    return $consulta->execute();
 	}
 
@@ -117,11 +119,12 @@ class Producto{
 		public static function AgregarPedido($pedido){
 
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mispedidos (descripcion, precio ,cantidad, fecha, id, id_producto)
-	                VALUES (:descripcion,:precio,:cantidad,:fecha ,:id,:id_producto)");
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mispedidos (descripcion, precio ,cantidad, fecha, estado,id, id_producto)
+	                VALUES (:descripcion,:precio,:cantidad,:fecha,:estado ,:id,:id_producto)");
 	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
 	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
+	    $consulta->bindValue(":estado", $pedido["estado"], PDO::PARAM_STR);
 	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
 	   	$consulta->bindValue(":cantidad", $pedido["cantidad"], PDO::PARAM_INT);
@@ -133,10 +136,11 @@ class Producto{
 	public static function ModificarPedido($pedido){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mispedidos
-	        SET descripcion = :descripcion, precio = :precio, cantidad = :cantidad,fecha = :fecha,id=:id,id_producto = :id_producto WHERE id_pedido = :id_pedido");
+	        SET descripcion = :descripcion, precio = :precio, cantidad = :cantidad,fecha = :fecha,estado = :estado,id=:id,id_producto = :id_producto WHERE id_pedido = :id_pedido");
 	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
 	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
+	     $consulta->bindValue(":estado", $pedido["estado"], PDO::PARAM_STR);
 	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id_pedido", $pedido["id_pedido"], PDO::PARAM_INT);

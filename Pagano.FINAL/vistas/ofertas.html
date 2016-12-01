@@ -4,6 +4,7 @@
 			<tr>
 			    <th>NOMBRE</th> 
 			    <th>COSTO</th>
+			    <th>ID SUCURSAL</th>
 			    <th>FIN DE OFERTA</th>
 			    
 			</tr>
@@ -11,6 +12,7 @@
 
 				<td> {{oferta.nombre}} </td>
 				<td> {{oferta.costo}} </td>
+				<td> {{oferta.id_Local}} </td>
 				<td> {{oferta.fecha}} </td>
 	
 				<td> <button ng-click="desplegarMod(oferta)" class="btn btn-default btn-primary"> Modificar </button> </td>
@@ -28,6 +30,7 @@
 				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
 				<input type="text" ng-model="modificar.costo" placeholder="Ingrese Costo" required> 
 				<input type="date" ng-model="modificar.fecha"  required> 
+				<input type="text" ng-model="modificar.id_Local" placeholder="Ingrese id de la Sucursal" required>
 
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>

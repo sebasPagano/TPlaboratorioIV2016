@@ -3,7 +3,9 @@ angular
   .controller('PedidosAltaCtrl',function($scope,$http,FileUploader,$auth){
 
   $scope.usuario = $auth.getPayload().usuarioLogueado;
-
+    var f = new Date();
+      var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
+      console.log(fecha);
   console.log($scope.usuario.tipo);
 $scope.listado=[];
   $scope.alta ={};
@@ -21,6 +23,7 @@ $scope.listado=[];
         console.info("Error: ", error);
 
     });
+
 
      $scope.guardar = function(){
      	
@@ -40,6 +43,12 @@ $scope.listado=[];
    			}
     	
     	}
+
+      $scope.alta.estado = "pendiente";
+
+
+
+
         $http.post("http://localhost:8080/Pagano.FINAL/ws1/pedido",$scope.alta)
             .then(function (respuesta){
 
@@ -52,6 +61,7 @@ $scope.listado=[];
             console.info("Error: ", error);
 
         });
+    
 
 
     }

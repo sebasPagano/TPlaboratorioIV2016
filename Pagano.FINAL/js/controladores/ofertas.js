@@ -55,6 +55,7 @@ angular
 
         $scope.modificar.nombre = oferta.nombre;
         $scope.modificar.fecha = oferta.fecha;
+        $scope.modificar.id_Local = oferta.id_Local;
         console.info("Modificacionlsitado",$scope.listado);
     }
 

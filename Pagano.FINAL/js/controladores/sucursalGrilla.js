@@ -3,7 +3,7 @@ angular
   .controller('SucursalGrillaCtrl',function($scope,$http,$auth,$state,NgMap){
 
   	    $scope.mapa = {};
-  	    $scope.SucursalVer = false;
+  	    $scope.SucursalVer = 0;
    		 $scope.latitud = "-34.662189";
    		 $scope.longitud = "-58.364643";
 
@@ -20,16 +20,17 @@ angular
 
 	    });
 
-	    $scope.GPS = function(latitud,longitud)
+	    $scope.GPS = function(latitud,longitud,id)
 	    {
-	    $scope.SucursalVer = true;
+	    $scope.SucursalVer = 1;
 	    $scope.latitud = latitud;
    		$scope.longitud = longitud;
+   		$scope.SucursalId = id;
 
 	    }
 	    $scope.OCULTAR = function()
 	    {
-	    $scope.SucursalVer = false;
+	    $scope.SucursalVer = 0;
 	
 
 	    }

@@ -15,6 +15,24 @@ angular
 
     });
 
+    $scope.Estado = function(pedido)
+    {
+      pedido.estado = "cerrado";
+      $http.put("http://localhost:8080/Pagano.FINAL/ws1/pedidoM",pedido)
+        .then(function (respuesta){
+
+            console.info("Modificado: ", respuesta.data);
+            $scope.modo = false;
+
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+    });
+
+    } 
+
      $scope.desplegarMod = function (pedido){
 
         $scope.modificar = pedido;
@@ -23,7 +41,7 @@ angular
    $scope.modificar.descripcion = pedido.descripcion;
         $scope.modificar.cantidad = pedido.cantidad;
         $scope.modificar.id = pedido.id;
-     
+        $scope.modificar.estado = pedido.estado;
         $scope.modificar.fecha = pedido.fecha;
 
   	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos")

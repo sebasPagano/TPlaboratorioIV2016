@@ -3,7 +3,7 @@ angular
   .controller('OfertasAltaCtrl',function($scope,$http,FileUploader,$auth){
 
   	$scope.alta = {};
-  	$scope.Buscar = function(id)
+  	/*$scope.Buscar = function(id)
   	{
   	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos/"+id)
     .then(function (respuesta){
@@ -20,7 +20,7 @@ angular
         console.info("Error: ", error);
 
     });
-	}
+	}*/
 
 	   $scope.guardar = function(){
 
