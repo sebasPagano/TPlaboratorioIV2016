@@ -1,11 +1,22 @@
 angular
   .module('proyecto')
-  .controller('abmGrillaCtrl',function($scope,$http,$auth){
+  .controller('abmGrillaCtrl',function($scope,FactoryUsuario,$http,$auth){
 $scope.usuarioM = $auth.getPayload().usuarioLogueado;
     $scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
 
+      FactoryUsuario.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+    });
+
+/*
     $http.get("http://localhost:8080/Pagano.FINAL/ws1/users")
     .then(function (respuesta){
 
@@ -17,11 +28,11 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
 
         console.info("Error: ", error);
 
-    });
+    });*/
 
     $scope.borrar = function(id){
 
-        $http.delete("http://localhost:8080/Pagano.FINAL/ws1/usuario/"+ id)
+       /* $http.delete("http://localhost:8080/Pagano.FINAL/ws1/usuario/"+ id)
             .then(function (respuesta){
 
                 console.info("Filas restantes: ", respuesta.data);
@@ -31,7 +42,17 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
 
                 console.info("Error: ", error);
 
-        });
+        });*/
+
+        FactoryUsuario.Borrar(id).then(function(respuesta){
+       
+        console.info("Filas restantes: ", respuesta);
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+      });
     }
 
     $scope.desplegarMod = function (persona){
@@ -45,8 +66,17 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
 
     $scope.actualizar = function(){
 
-        $objetoUsuario = JSON.stringify($scope.modificar);
+       FactoryUsuario.Editar($scope.modificar).then(function(respuesta){
+        console.info("Modificado: ", respuesta);
+        $scope.modo = false;
+      
 
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });
+/*
         $http.put("http://localhost:8080/Pagano.FINAL/ws1/usuarioM",$scope.modificar)
             .then(function (respuesta){
 
@@ -58,7 +88,7 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
 
                 console.info("Error: ", error);
 
-        });
+        });*/
 
     }            
 

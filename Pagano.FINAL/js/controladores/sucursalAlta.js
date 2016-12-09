@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('SucursalAltaCtrl',function($scope,$http,FileUploader,$auth,$state){
+  .controller('SucursalAltaCtrl',function($scope,$http,FileUploader,$auth,$state,FactorySucursal){
 
   	$scope.alta = {};
 
@@ -30,12 +30,21 @@ angular
         $scope.alta.foto1 = $scope.uploader.queue[0].file.name;
         $scope.alta.foto2= $scope.uploader.queue[1].file.name;
         $scope.alta.foto3= $scope.uploader.queue[2].file.name;
-
+/*
         $http.post("http://localhost:8080/Pagano.FINAL/ws1/sucursal" ,$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);
 
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });*/
+        FactorySucursal.Guardar($scope.alta).then(function(respuesta){
+        console.log("Exito",respuesta);
+      
 
         },function(error){
 

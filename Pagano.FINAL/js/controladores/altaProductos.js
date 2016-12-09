@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('abmAltaProductoCtrl',function($scope,$http,FileUploader,$auth,$state){
+  .controller('abmAltaProductoCtrl',function($scope,$http,FileUploader,$auth,$state,FactoryProducto){
  
     $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
     $scope.uploader.queueLimit = 10;
@@ -30,12 +30,21 @@ angular
        // $scope.nombreF = $scope.item.file.name;
         $scope.alta.foto = $scope.uploader.queue[0].file.name;
 
-        $http.post("http://localhost:8080/Pagano.FINAL/ws1/producto",$scope.alta)
+       /* $http.post("http://localhost:8080/Pagano.FINAL/ws1/producto",$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);
         
 
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });*/
+        FactoryProducto.Guardar($scope.alta).then(function(respuesta){
+        console.log("Exito",respuesta);
+      
 
         },function(error){
 

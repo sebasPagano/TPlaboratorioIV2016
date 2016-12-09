@@ -1,10 +1,10 @@
 angular
   .module('proyecto')
-  .controller('PedidosGrillaCtrl',function($scope,$state,$stateParams,$http,FileUploader,$auth){
+  .controller('PedidosGrillaCtrl',function($scope,$state,$http,FileUploader,$auth,FactoryPedido,FactoryProducto,FactoryEncuesta){
 $scope.modoEncuesta = false;
 
 $scope.usuario = $auth.getPayload().usuarioLogueado;
-  	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/pedidos")
+  	 /*$http.get("http://localhost:8080/Pagano.FINAL/ws1/pedidos")
     .then(function (respuesta){
 
         $scope.listado = respuesta.data;
@@ -15,21 +15,31 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
 
         console.info("Error: ", error);
 
+    });*/
+    
+      FactoryPedido.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
     });
-    console.log($stateParams);
+
     $scope.RealizarEncuesta = function(descripcion)
     {
       $scope.modoEncuesta = true;
       console.log(descripcion);
       $scope.descripcionProd = descripcion;
-     // $state.go('menu.encuesta');
+
 
     }
 
     $scope.Estado = function(pedido)
     {
       pedido.estado = "cerrado";
-      $http.put("http://localhost:8080/Pagano.FINAL/ws1/pedidoM",pedido)
+      /*$http.put("http://localhost:8080/Pagano.FINAL/ws1/pedidoM",pedido)
         .then(function (respuesta){
 
             console.info("Modificado: ", respuesta.data);
@@ -40,19 +50,40 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
 
             console.info("Error: ", error);
 
-    });
+    });*/
+        FactoryPedido.Editar(pedido).then(function(respuesta){
+        console.info("Modificado: ", respuesta);
+        $scope.modo = false;
+      
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });
 
     } 
+
 $scope.alta = {};
+
         $scope.guardarEncuesta = function(){
 
           $scope.alta.descripcion = $scope.descripcionProd;
-        $http.post("http://localhost:8080/Pagano.FINAL/ws1/encuesta",$scope.alta)
+       /* $http.post("http://localhost:8080/Pagano.FINAL/ws1/encuesta",$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);
         
 
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });*/
+        FactoryEncuesta.Guardar($scope.alta).then(function(respuesta){
+        console.log("Exito",respuesta);
+      
 
         },function(error){
 
@@ -74,7 +105,7 @@ $scope.alta = {};
         $scope.modificar.estado = pedido.estado;
         $scope.modificar.fecha = pedido.fecha;
 
-  	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos")
+  	/* $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos")
     .then(function (respuesta){
 
         $scope.listadoProductos = respuesta.data;
@@ -82,6 +113,15 @@ $scope.alta = {};
 
 
     },function(error){
+
+        console.info("Error: ", error);
+
+    });*/
+        FactoryProducto.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listadoProductos = respuesta.data;
+
+      },function(error){
 
         console.info("Error: ", error);
 
@@ -105,7 +145,7 @@ $scope.alta = {};
     	
     	}
 
-        
+        /*
         $http.put("http://localhost:8080/Pagano.FINAL/ws1/pedidoM",$scope.modificar)
             .then(function (respuesta){
 
@@ -116,6 +156,16 @@ $scope.alta = {};
             },function(error){
 
                 console.info("Error: ", error);
+
+        });*/
+        FactoryPedido.Editar($scope.modificar).then(function(respuesta){
+        console.info("Modificado: ", respuesta);
+        $scope.modo = false;
+      
+
+        },function(error){
+
+            console.info("Error: ", error);
 
         });
 

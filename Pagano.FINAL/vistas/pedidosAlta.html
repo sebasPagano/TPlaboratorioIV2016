@@ -11,7 +11,7 @@
 			    	<option ng-repeat="producto in listado track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
 		    </select>
 			<input type="text" ng-model="alta.cantidad" placeholder="ingrese cantidad" required/>
-			<input type="date" ng-model="alta.fecha" placeholder="Ingrese nombre" required> 
+			<font color="black"><input type="date" ng-model="alta.fecha"  required> </font>
 
 			<span ng-if="usuario.tipo!='Cliente'" >
 			<input type="text" ng-model="alta.id" placeholder="Ingrese id del cliente" required> 

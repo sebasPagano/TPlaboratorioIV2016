@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('PedidosAltaCtrl',function($scope,$http,FileUploader,$auth){
+  .controller('PedidosAltaCtrl',function($scope,$http,FileUploader,$auth,FactoryProducto,FactoryPedido){
 
   $scope.usuario = $auth.getPayload().usuarioLogueado;
     var f = new Date();
@@ -9,7 +9,7 @@ angular
   console.log($scope.usuario.tipo);
 $scope.listado=[];
   $scope.alta ={};
-
+/*
   $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos")
     .then(function (respuesta){
 
@@ -19,6 +19,16 @@ $scope.listado=[];
 
 
     },function(error){
+
+        console.info("Error: ", error);
+
+    });*/
+  //listado de productos
+        FactoryProducto.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+      },function(error){
 
         console.info("Error: ", error);
 
@@ -47,9 +57,17 @@ $scope.listado=[];
       $scope.alta.estado = "pendiente";
 
 
+       FactoryPedido.Guardar($scope.alta).then(function(respuesta){
+        console.log("Exito",respuesta);
+      
 
+        },function(error){
 
-        $http.post("http://localhost:8080/Pagano.FINAL/ws1/pedido",$scope.alta)
+            console.info("Error: ", error);
+
+        });
+
+      /*  $http.post("http://localhost:8080/Pagano.FINAL/ws1/pedido",$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);
@@ -60,7 +78,7 @@ $scope.listado=[];
 
             console.info("Error: ", error);
 
-        });
+        });*/
     
 
 

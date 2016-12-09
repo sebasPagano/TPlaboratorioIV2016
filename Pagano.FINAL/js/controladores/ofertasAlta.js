@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('OfertasAltaCtrl',function($scope,$http,FileUploader,$auth){
+  .controller('OfertasAltaCtrl',function($scope,$http,FileUploader,$auth,FactoryOferta){
 
   	$scope.alta = {};
   	/*$scope.Buscar = function(id)
@@ -25,13 +25,22 @@ angular
 	   $scope.guardar = function(){
 
        // $scope.nombreF = $scope.item.file.name;
-
+/*
         $http.post("http://localhost:8080/Pagano.FINAL/ws1/oferta",$scope.alta)
             .then(function (respuesta){
 
             console.info("Exito", respuesta);
         
 
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });*/
+          FactoryOferta.Guardar($scope.alta).then(function(rta){
+        console.log("Exito",rta);
+      
 
         },function(error){
 

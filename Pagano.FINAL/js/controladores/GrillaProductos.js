@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('abmGrillaProductoCtrl',function($scope,FileUploader,$http,$auth){
+  .controller('abmGrillaProductoCtrl',function($scope,FileUploader,$http,$auth,FactoryProducto){
 
     $scope.listado = {};
     $scope.modificar = {};
@@ -27,7 +27,7 @@ angular
 
 
     $scope.usuario = $auth.getPayload().usuarioLogueado;
-
+/*
     $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos")
     .then(function (respuesta){
 
@@ -39,10 +39,19 @@ angular
 
         console.info("Error: ", error);
 
+    });*/
+      FactoryProducto.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
     });
 
     $scope.borrar = function(id){
-
+/*
         $http.delete("http://localhost:8080/Pagano.FINAL/ws1/producto/"+ id)
             .then(function (respuesta){
 
@@ -53,7 +62,17 @@ angular
 
                 console.info("Error: ", error);
 
-        });
+        });*/
+        
+        FactoryProducto.Borrar(id).then(function(respuesta){
+       
+        console.info("Filas restantes: ", respuesta);
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+      });
     }
 
     $scope.desplegarMod = function (producto){
@@ -69,7 +88,7 @@ angular
 
         //$objetoUsuario = JSON.stringify($scope.modificar);
         $scope.modificar.foto = $scope.uploader.queue[0].file.name;
-        
+        /*
         $http.put("http://localhost:8080/Pagano.FINAL/ws1/productoM",$scope.modificar)
             .then(function (respuesta){
 
@@ -80,6 +99,16 @@ angular
             },function(error){
 
                 console.info("Error: ", error);
+
+        });*/
+       FactoryProducto.Editar($scope.modificar).then(function(respuesta){
+        console.info("Modificado: ", respuesta);
+        $scope.modo = false;
+      
+
+        },function(error){
+
+            console.info("Error: ", error);
 
         });
 
