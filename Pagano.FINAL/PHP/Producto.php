@@ -181,6 +181,21 @@ class Producto{
 	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
 	}
 
+		public static function AgregarEncuesta($Encuesta){
+
+	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO misencuestas (descripcion,tiempo, estado,comentarios)
+	                VALUES (:descripcion,:tiempo, :estado, :comentarios)");
+	    $consulta->bindValue(":tiempo", $Encuesta["tiempo"], PDO::PARAM_STR);
+	    $consulta->bindValue(":estado", $Encuesta["estado"], PDO::PARAM_STR);
+	    $consulta->bindValue(":comentarios", $Encuesta["comentarios"], PDO::PARAM_STR);
+	    $consulta->bindValue(":descripcion", $Encuesta["descripcion"], PDO::PARAM_STR);
+
+	    $consulta->execute();
+
+	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
+	}
+
 	public static function CrearConexion(){
 		try
 		{

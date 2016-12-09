@@ -1,6 +1,7 @@
 angular
   .module('proyecto')
-  .controller('PedidosGrillaCtrl',function($scope,$http,FileUploader,$auth){
+  .controller('PedidosGrillaCtrl',function($scope,$state,$stateParams,$http,FileUploader,$auth){
+$scope.modoEncuesta = false;
 
 $scope.usuario = $auth.getPayload().usuarioLogueado;
   	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/pedidos")
@@ -15,6 +16,15 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
         console.info("Error: ", error);
 
     });
+    console.log($stateParams);
+    $scope.RealizarEncuesta = function(descripcion)
+    {
+      $scope.modoEncuesta = true;
+      console.log(descripcion);
+      $scope.descripcionProd = descripcion;
+     // $state.go('menu.encuesta');
+
+    }
 
     $scope.Estado = function(pedido)
     {
@@ -33,6 +43,25 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
     });
 
     } 
+$scope.alta = {};
+        $scope.guardarEncuesta = function(){
+
+          $scope.alta.descripcion = $scope.descripcionProd;
+        $http.post("http://localhost:8080/Pagano.FINAL/ws1/encuesta",$scope.alta)
+            .then(function (respuesta){
+
+            console.info("Exito", respuesta);
+        
+
+
+        },function(error){
+
+            console.info("Error: ", error);
+
+        });
+
+
+       }
 
      $scope.desplegarMod = function (pedido){
 

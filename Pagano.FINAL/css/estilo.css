@@ -152,6 +152,17 @@ left:0px;
   background:#f0f0f0;
   padding:6% 4%;
 }
+#formEncuesta {
+
+  background:#f0f0f0;
+  padding:6% 4%;
+}
+
+.divEncuesta {
+
+  margin-left: 20%;
+   text-align: left;
+}
 
 input[type="text"],input[type="file"],,input[type="file"]{
   width:92%;

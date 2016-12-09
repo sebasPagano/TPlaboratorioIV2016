@@ -60,6 +60,7 @@
       <li role="presentation"><a ui-sref="menu.pedidosGrilla()" >Lista</a></li>
       </ul>
     </li>
+    <li role="presentation" ng-if="usuario.tipo=='Administrador'"><a ui-sref="menu.graficos()">Graficos</a></li>
 	  <li role="presentation"><a ng-click="logout()">Cerrar sesion</a></li>
 	  <li style="position:absolute;left:90%;top:1%" role="presentation">{{nombre}}</li>
 	</ul>

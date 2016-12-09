@@ -1,5 +1,5 @@
 <div class="container">
-		<div ng-if="!modo">
+		<div ng-if="!modo && !modoEncuesta">
 		<table class="table table-hover table-responsive" align="center">
 			<tr>
 			    <th>ID</th>
@@ -27,7 +27,7 @@
 
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
-				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id && pedido.estado!='pendiente'"> <button ng-click="RealizarEncuesta(pedido.descripcion)" class="btn btn-default btn-primary"> Realizar Encuesta </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>		
 			<tr ng-if="usuario.tipo!='Cliente'" ng-repeat="pedido in listado track by $index">
@@ -46,11 +46,12 @@
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
 				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
+
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>				 
 			    
 		</table>
-		</div>
+		</div> <!-- div modo -->
 
 			<div ng-if="modo">
 				<div class="page-header">
@@ -68,4 +69,55 @@
 				</div>
 			</div>
 
+
 			</form>
+
+		<!--	<div ng-if="modoEncuesta">
+				<div class="page-header">
+			<center> <h1> Encuesta</h1>   </center>     
+				</div>
+				<form name="formAlta" class="tablas" enctype="multipart/form-data">
+				<select  ng-model="modificar.descripcion"  required>
+			    	<option ng-repeat="producto in listadoProductos track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
+			    </select>
+				<input type="text" ng-model="modificar.cantidad" placeholder="ingrese cantidad" required/>
+				<input type="date" ng-model="modificar.fecha" placeholder="Ingrese nombre" required> 
+
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
+					
+				</div>
+			</div>-->
+
+	<div ng-if="modoEncuesta" class="container">
+		<div class="page-header">
+			<center> <h1>Realize Encuesta</h1>   </center>     
+		</div>
+		<div class="CajaInicio animated bounceInRight">
+             <h1>Encuesta</h1>
+
+			<form name="formEncuesta" id="formEncuesta"  enctype="multipart/form-data">
+			
+			<!--<label>{{producto}}<label>-->
+			<label>Nombre del producto : {{descripcionProd}}</label></br>
+			<label>Estado del producto</label><br>
+				<div class="divEncuesta"><input type="radio" name="sexo"  ng-model="alta.estado" value="Excelente"> <label>Excelente</label></input></br>
+ 				<input type="radio" name="estado" ng-model="alta.estado" value="Bueno"> <label>Bueno</label></input><br>
+ 				<input type="radio" name="estado"  ng-model="alta.estado" value="Regular"> <label>Regular</label></input></br>
+ 				<input type="radio" name="estado" ng-model="alta.estado" value="Malo"> <label>Malo</label></input><br>
+				</div>
+ 			<label>Tiempo de demora</label><br>
+				<div class="divEncuesta"><input type="radio" name="tiempo"  ng-model="alta.tiempo" value="Excelente"> <label>Ninguno</label></input></br>
+ 				<input type="radio" name="tiempo" ng-model="alta.tiempo" value="Bueno"> <label>10 minutos</label></input><br>
+ 				<input type="radio" name="tiempo"  ng-model="alta.tiempo" value="Regular"> <label>20 minutos</label></input></br>
+ 				<input type="radio" name="tiempo" ng-model="alta.tiempo" value="Malo"> <label>Mas de 30 minutos</label></input><br>
+ 			</div>
+
+			<center><font color="black"><textarea ng-model="alta.comentarios" name="ejemploarea" cols="30" rows="3"  maxlength="50" placeholder="Ingrese un breve comentario"></textarea></font></center>
+
+			<a class="btn btn-warning" name="guardar" ng-disabled="formEncuesta.$invalid" ng-if="!formEncuesta.$invalid" ng-click="guardarEncuesta()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Enviar Encuesta!</a>
+			
+
+			</form>
+
+			</div>
+	</div>

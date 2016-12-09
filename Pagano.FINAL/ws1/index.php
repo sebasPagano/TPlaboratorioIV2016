@@ -265,6 +265,16 @@ $app->post('/sucursal', function ($request, $response, $args) {
 
 });
 
+$app->post('/encuesta', function ($request, $response, $args) {
+
+    $array=[];
+    $encuesta = $request->getParsedBody();
+    $array["rta"]= Producto::AgregarEncuesta($encuesta);
+    return  $response->write($array["rta"]);
+
+
+});
+
 
 
 

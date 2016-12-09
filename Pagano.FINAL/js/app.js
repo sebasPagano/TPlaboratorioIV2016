@@ -80,11 +80,13 @@ $authProvider.authHeader = "data"
             url: '/pedidosGrilla',
             views: {
                 'contenido': {
+
                     templateUrl: 'vistas/pedidosGrilla.html',
                     controller: 'PedidosGrillaCtrl'
                 }
             }
         })
+
 
 
         .state('menu.sucursalAlta', {
@@ -110,12 +112,12 @@ $authProvider.authHeader = "data"
         })
 
 
-        .state('menu.sucursalLomas', {
-            url: '/sucursal/Lomas',
+        .state('menu.graficos', {
+            url: '/Graficos',
             views: {
                 'contenido': {
-                    templateUrl: 'vistas/sucursalLomas.html',
-                    controller: 'SucursalLomasCtrl'
+                    templateUrl: 'vistas/Graficos.html',
+                    controller: 'GraficosCtrl'
                  }
             }
           
