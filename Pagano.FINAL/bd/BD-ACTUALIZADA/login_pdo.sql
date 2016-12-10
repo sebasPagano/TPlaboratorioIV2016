@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2016 a las 06:55:33
+-- Tiempo de generación: 10-12-2016 a las 01:42:44
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.21
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `login_pdo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `misencuestas`
+--
+
+CREATE TABLE `misencuestas` (
+  `id` int(4) UNSIGNED NOT NULL,
+  `descripcion` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `tiempo` varchar(25) CHARACTER SET utf8 NOT NULL,
+  `estado` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `comentarios` varchar(50) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Volcado de datos para la tabla `misencuestas`
+--
+
+INSERT INTO `misencuestas` (`id`, `descripcion`, `tiempo`, `estado`, `comentarios`) VALUES
+(1, 'Provolone', 'Ninguno', 'Excelente', 'Muy buen local.'),
+(2, 'Cheddar Y Panceta', '20 minutos', 'Bueno', 'Se solicita menos tiempo'),
+(3, 'Fugazzetta', 'Ninguno', 'Bueno', 'Muy buen local');
 
 -- --------------------------------------------------------
 
@@ -43,7 +66,7 @@ CREATE TABLE `mislocales` (
 
 INSERT INTO `mislocales` (`id_Local`, `localidad`, `direccion`, `latitud`, `longitud`, `foto1`, `foto2`, `foto3`) VALUES
 (1, 'Wilde', 'LAS FLORES ESQ. M. MORENO', '-34.7030157', '-58.3185284', 'Wilde1.jpg', 'Wilde2.jpg', 'Wilde3.jpg'),
-(2, 'Lanus Oeste', 'Del Valle Iberlucea 2750', '-34.7031503', '-58.3947827', 'Lanus1.jpg', 'Lanus2.jpg', 'Lanus3.jpg'),
+(2, 'Lanus Oeste', 'Del Valle Iberlucea 2750', '-34.7031507', '-58.3947823', 'Lanus1.jpg', 'Lanus2.JPG', 'Lanus3.jpg'),
 (3, 'Banfield', 'ALSINA Y CHACABUCO ', '-34.7455505', '-58.3955656', 'Banfield1.jpg', 'Banfield2.jpg', 'Banfield3.jpg'),
 (4, 'Alsina', 'J. D. PERÓN 3062', '-34.6724936', '-58.4112895', 'alsina1.jpg', 'alsina2.jpg', 'alsina3.jpg');
 
@@ -66,14 +89,12 @@ CREATE TABLE `misofertas` (
 --
 
 INSERT INTO `misofertas` (`id_oferta`, `nombre`, `costo`, `fecha`, `id_Local`) VALUES
-(1, 'Muzarrella Con Coca Cola', 150, '2016-12-16', 1),
-(2, 'Muzarrella Con Stella Artois', 160, '2016-12-10', 2),
-(4, 'Fugazzetta Rellena Con Coca Cola', 240, '2016-12-27', 3),
 (5, 'Dos Provolone Con Dos Coca Cola', 300, '2017-01-12', 4),
 (6, 'Tres Muzzarella con Dos Stella Artois', 350, '2017-01-21', 1),
 (7, 'Tres Muzzarella con Dos Stella Artois', 350, '2017-01-21', 2),
 (8, 'Tres Muzzarella con Dos Stella Artois', 350, '2017-01-21', 3),
-(9, 'Tres Muzzarella con Dos Stella Artois', 350, '2017-01-21', 4);
+(9, 'Tres Muzzarella con Dos Stella Artois', 350, '2017-01-21', 4),
+(12, 'Fugazzeta Con Coca', 160, '2017-01-06', 1);
 
 -- --------------------------------------------------------
 
@@ -97,11 +118,13 @@ CREATE TABLE `mispedidos` (
 --
 
 INSERT INTO `mispedidos` (`id_pedido`, `descripcion`, `precio`, `cantidad`, `fecha`, `estado`, `id`, `id_producto`) VALUES
-(1, 'Fugazzetta', 280, 2, '2016-11-30', 'pendiente', 2, 1),
+(1, 'Fugazzetta', 280, 2, '2016-11-30', 'cerrado', 2, 1),
 (2, 'Cheddar Y Panceta', 900, 5, '2016-12-15', 'pendiente', 2, 10),
 (3, 'Provolone', 280, 2, '2016-11-11', 'cerrado', 1, 7),
 (4, 'Cheddar Y Panceta', 360, 2, '2016-11-02', 'cerrado', 1, 10),
-(5, 'Fugazzetta', 280, 2, '2016-12-09', 'cerrado', 1, 3);
+(5, 'Fugazzetta', 280, 2, '2016-12-09', 'cerrado', 1, 3),
+(6, 'Provolone', 420, 3, '2016-12-18', 'pendiente', 1, 7),
+(7, 'Napolitana', 280, 2, '2016-12-24', 'pendiente', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -159,11 +182,17 @@ INSERT INTO `misusuarios` (`id`, `correo`, `nombre`, `clave`, `tipo`, `estado`) 
 (2, 'admin@admin.com', 'admin', '321', 'Administrador', 'desbloqueado'),
 (3, 'encargado@encargado.com', 'encargado', '321', 'Encargado', 'desbloqueado'),
 (4, 'empleado@empleado.com', 'empleado', '123', 'Empleado', 'desbloqueado'),
-(8, 'cliente2@cliente.com', 'Jorgito', 'xd', 'Cliente', '');
+(8, 'cliente2@cliente.com', 'Natsu Dragneel', 'asd', 'Cliente', '');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `misencuestas`
+--
+ALTER TABLE `misencuestas`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `mislocales`
@@ -203,6 +232,11 @@ ALTER TABLE `misusuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `misencuestas`
+--
+ALTER TABLE `misencuestas`
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT de la tabla `mislocales`
 --
 ALTER TABLE `mislocales`
@@ -211,22 +245,22 @@ ALTER TABLE `mislocales`
 -- AUTO_INCREMENT de la tabla `misofertas`
 --
 ALTER TABLE `misofertas`
-  MODIFY `id_oferta` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_oferta` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `mispedidos`
 --
 ALTER TABLE `mispedidos`
-  MODIFY `id_pedido` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pedido` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `misproductos`
 --
 ALTER TABLE `misproductos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `misusuarios`
 --
 ALTER TABLE `misusuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

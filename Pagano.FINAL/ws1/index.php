@@ -275,6 +275,18 @@ $app->post('/encuesta', function ($request, $response, $args) {
 
 });
 
+$app->put('/sucursalM', function ($request, $response, $args) {
+
+    $array = [];
+    $sucursal = $request->getParsedBody();
+    $array["rta"]= Producto::ModificarSucursal($sucursal);
+
+
+    return  $response->write($array["rta"]);
+
+    
+});
+
 
 
 
