@@ -104,6 +104,16 @@ $app->get('/users', function ($request, $response, $args) {
     
 });
 
+$app->get('/users/{perfil}', function ($request, $response, $args) {
+    
+    $perfil = $args["perfil"];
+    $array=[];
+    $array["rta"]= Usuario::BuscarPorPerfil($perfil);
+    return  $response->write($array["rta"]);
+
+    
+});
+
 
 
 //PRODUCTOS

@@ -26,9 +26,22 @@ class Usuario{
 				WHERE U.id = :id";
 		$consulta = $conexion->prepare($sql);
 		$consulta->bindValue(":id", $id, PDO::PARAM_INT);
+
 		$consulta->execute();
-		$usuario = $consulta->fetchObject('Usuario');
-		return $usuario;
+		    $arrUser = json_encode($consulta->fetchAll());
+	    return $arrUser; 
+	}
+
+		public static function BuscarPorPerfil($perfil){
+		
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT *
+				FROM misusuarios 
+				WHERE tipo = :tipo");
+		$consulta->bindValue(":tipo", $perfil, PDO::PARAM_STR);
+		$consulta->execute();
+	    $arrUser = json_encode($consulta->fetchAll());
+	    return $arrUser; 
 	}
 	public static function TraerTodosLosUsuarios(){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

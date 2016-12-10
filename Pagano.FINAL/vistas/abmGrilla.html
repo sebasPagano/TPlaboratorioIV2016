@@ -1,5 +1,15 @@
 	<div class="container">
+		<select ng-click="Buscar()" ng-model="tipo" style="width:30%">
+			<option value="todos">Todos los usuarios</option>
+	    	<option value="Administrador">Filtrar por Administrador</option>
+	    	<option value="Encargado">Filtrar por Encargado</option>
+	    	<option value="Empleado">Filtrar por Empleado</option>
+			<option value="Cliente">Filtrar por Cliente</option>
+	    </select>
+
+
 		<div ng-if="!modo">
+			
 		<table class="table table-hover table-responsive">
 			<tr>
 				<th>ID</th>

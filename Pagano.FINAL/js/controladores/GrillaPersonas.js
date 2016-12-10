@@ -5,8 +5,9 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
     $scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
+    $scope.tipo = "todos";
 
-      FactoryUsuario.Listado().then(function(respuesta){
+     FactoryUsuario.Listado().then(function(respuesta){
         console.log("Listado con factory: ",respuesta.data);
         $scope.listado = respuesta.data;
 
@@ -15,6 +16,39 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
         console.info("Error: ", error);
 
     });
+
+
+
+    $scope.Buscar = function(){
+        $scope.listado = [];
+    if($scope.tipo == "todos")
+    {    
+      FactoryUsuario.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+          },function(error){
+
+            console.info("Error: ", error);
+
+        });
+    }else
+    {
+         console.log($scope.tipo);
+      FactoryUsuario.BuscarPor($scope.tipo).then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listado = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+    });
+
+    }
+
+    }
+
 
 /*
     $http.get("http://localhost:8080/Pagano.FINAL/ws1/users")

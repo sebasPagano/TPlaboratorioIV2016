@@ -15,6 +15,9 @@ angular
     this.Editar = function(ruta , objeto){
     	return  $http.put(ruta,objeto);
     }
+    this.BuscarPor = function(ruta){
+        return $http.get(ruta);
+    }
 
 
 

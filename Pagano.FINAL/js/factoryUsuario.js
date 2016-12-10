@@ -7,6 +7,7 @@ angular
     objeto.Guardar = Guardar;
     objeto.Borrar = Borrar;
     objeto.Editar = Editar;
+    objeto.BuscarPor = BuscarPor;
 
     return objeto;
 
@@ -24,6 +25,9 @@ angular
     }
     function Editar(usuario){
         return ServicioPizzeria.Editar("http://localhost:8080/Pagano.FINAL/ws1/usuarioM",usuario);
+    }
+    function BuscarPor(perfil){
+        return ServicioPizzeria.BuscarPor("http://localhost:8080/Pagano.FINAL/ws1/users/"+perfil);
     }
 
 
