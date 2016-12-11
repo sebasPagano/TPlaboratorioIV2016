@@ -19,6 +19,16 @@
 				    	<option  value="Cliente">Cliente</option>
 			    </select>
 			</span>
+			<hidden ng-init="alta.estado='desbloqueado'"></hidden>
+			<hidden ng-init="alta.id_Local='0'"></hidden>
+			<span ng-if="ConectadoAlta==true  && usuario.tipo!='Cliente' && usuario.tipo!='Empleado'">
+				<select  ng-model="alta.id_Local"  required>
+						<option value="0">Todos</option>
+				    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
+			    </select>
+			</span>
+
+
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Agregar Usuario!</a>
 					

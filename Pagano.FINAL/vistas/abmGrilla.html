@@ -1,11 +1,13 @@
 	<div class="container">
-		<select ng-click="Buscar()" ng-model="tipo" style="width:30%">
-			<option value="todos">Todos los usuarios</option>
-	    	<option value="Administrador">Filtrar por Administrador</option>
-	    	<option value="Encargado">Filtrar por Encargado</option>
-	    	<option value="Empleado">Filtrar por Empleado</option>
-			<option value="Cliente">Filtrar por Cliente</option>
+
+		<select  ng-disabled="modo" ng-click="Buscar()" ng-model="tipo" style="width:30%">
+			<option  value="todos">Todos</option>
+	    	<option  value="Administrador">Administrador</option>
+	    	<option  value="Encargado">Encargado</option>
+	    	<option  value="Empleado">Empleado</option>
+			<option  value="Cliente">Cliente</option>
 	    </select>
+
 
 
 		<div ng-if="!modo">
@@ -16,12 +18,14 @@
 			    <th>EMAIL</th>
 			    <th>NOMBRE</th>
 			    <th>TIPO</th>
+			    <th>ID_LOCAL</th>
 			</tr>
 			<tr ng-repeat="usuario in listado track by $index">
 				<td> {{usuario.id}} </td>
 				<td> {{usuario.correo}} </td>
 				<td> {{usuario.nombre}} </td>
 				<td> {{usuario.tipo}} </td>
+				<td> {{usuario.id_Local}} </td>
 				
 
 
@@ -47,6 +51,11 @@
 			    	<option value="Encargado" ng-if="usuarioM.tipo=='Administrador'">Encargado</option>
 			    	<option value="Empleado">Empleado</option>
 			    	<option value="Cliente">Cliente</option>
+			    </select>
+			    <hidden ng-init="modificar.estado='desbloqueado'"></hidden>
+			    <select  ng-model="modificar.id_Local"  required>
+						<option value="0">Todos</option>
+				    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
 			    </select>
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar usuario!</a>

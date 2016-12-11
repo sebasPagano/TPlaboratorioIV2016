@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('SucursalGrillaCtrl',function($scope,$http,$auth,$state,NgMap,FactorySucursal,FactoryOferta,FileUploader){
+  .controller('SucursalGrillaCtrl',function($scope,$http,$auth,$state,NgMap,FactorySucursal,FactoryOferta,FactoryUsuario,FileUploader){
 
   	    $scope.mapa = {};
   	    $scope.SucursalVer = 0;
@@ -9,7 +9,14 @@ angular
    		 $scope.latitud = "-34.662189";
    		 $scope.longitud = "-58.364643";
 
+       $scope.Conectado=$auth.isAuthenticated();
+     if($scope.Conectado == true)
+     {
+        $scope.usuario = $auth.getPayload().usuarioLogueado;
 
+        console.log($scope.usuario.id_Local)
+
+    }
 
     $scope.uploader = new FileUploader({url: 'PHP/upload.php'});
     $scope.uploader.queueLimit = 10;
@@ -41,6 +48,8 @@ angular
 
 	    });*/
 
+  
+
 	    FactorySucursal.Listado().then(function(respuesta){
         console.log("Listado con factory: ",respuesta.data);
         $scope.listado = respuesta.data;
@@ -50,6 +59,25 @@ angular
         console.info("Error: ", error);
 
     });
+
+     /*   FactoryUsuario.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listadoUsuarios = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+    });
+        $scope.ModificaLocal= false;
+      for(var i =0; i<$scope.listadoUsuarios.length; i++)
+      {
+        if($scope.listadoUsuarios[i].id_Local == $scope.listado[i].id_Local)
+        {
+          $scope.ModificaLocal =true;
+        }
+
+      }*/
 
 	    $scope.GPS = function(latitud,longitud,id)
 	    {

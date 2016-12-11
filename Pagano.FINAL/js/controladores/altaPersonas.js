@@ -1,12 +1,23 @@
 angular
   .module('proyecto')
-  .controller('abmAltaCtrl',function($scope,FactoryUsuario,$http,FileUploader,$auth){
+  .controller('abmAltaCtrl',function($scope,FactoryUsuario,$http,FileUploader,$auth,FactorySucursal){
 
     $scope.ConectadoAlta=$auth.isAuthenticated();
     if($scope.ConectadoAlta==true)
     {
 $scope.usuario = $auth.getPayload().usuarioLogueado;
 }
+
+    
+        FactorySucursal.Listado().then(function(respuesta){
+        console.log("Listado con factory: ",respuesta.data);
+        $scope.listadoSucursales = respuesta.data;
+
+      },function(error){
+
+        console.info("Error: ", error);
+
+    });
     $scope.alta = {};
 
     $scope.guardar = function(){

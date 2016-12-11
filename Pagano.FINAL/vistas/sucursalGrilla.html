@@ -37,7 +37,7 @@
 			<td ng-if="VerFotos==0" > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="Fotos(sucursal.id_Local)"> FOTOS </button> </td>
 			<td ng-if="VerFotos==1  && SucursalIdFoto == sucursal.id_Local"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="OcultarFotos()"> OCULTAR FOTOS</button> </td>
 
-			<td ng-if="usuario.tipo=='Encargado'"> <button ng-click="desplegarMod(sucursal)" class="btn btn-default btn-primary"> Modificar </button> </td>
+			<td ng-if="usuario.tipo=='Encargado' && usuario.id_Local == sucursal.id_Local"> <button ng-click="desplegarMod(sucursal)" class="btn btn-default btn-primary"> Modificar </button> </td>
 		
 
 			

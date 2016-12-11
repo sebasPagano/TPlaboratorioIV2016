@@ -7,12 +7,16 @@ angular
     $scope.datos.correo="admin@admin.com";//modifique
     $scope.datos.nombre="admin";
     $scope.datos.clave="321";
+
     $scope.login = function (){
 
         $auth.login({
             nombre: $scope.datos.nombre,
             usuario: $scope.datos.correo,
          clave:$scope.datos.clave
+
+
+
      })
         .then(function(response){
             if($auth.isAuthenticated()){

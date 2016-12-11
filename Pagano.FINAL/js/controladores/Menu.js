@@ -8,6 +8,7 @@ angular
 
 $scope.nombre = $scope.usuario.nombre;
     console.info("persona",$scope.usuario.tipo);
+    console.info("Datos Usuario",$scope.usuario);
 }
 
     $scope.logout = function()
