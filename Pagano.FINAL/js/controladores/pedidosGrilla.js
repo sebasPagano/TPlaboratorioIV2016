@@ -4,6 +4,9 @@ angular
 $scope.modoEncuesta = false;
 
 $scope.usuario = $auth.getPayload().usuarioLogueado;
+var f = new Date();
+  $scope.fecha1 =new Date(f.getFullYear(), f.getMonth(), f.getDate());
+  $scope.fecha2 =new Date(f.getFullYear(), f.getMonth(), f.getDate());
   	 /*$http.get("http://localhost:8080/Pagano.FINAL/ws1/pedidos")
     .then(function (respuesta){
 
@@ -35,6 +38,7 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
         console.info("Error: ", error);
 
     });
+       console.log("Listado ASDASD: ",$scope.listado);
 
     $scope.RealizarEncuesta = function(descripcion,pedido)
     {
@@ -129,7 +133,7 @@ $scope.alta = {};
         $scope.modificar.cantidad = pedido.cantidad;
         $scope.modificar.id = pedido.id;
         $scope.modificar.estado = pedido.estado;
-        $scope.modificar.fecha = pedido.fecha;
+        $scope.modificar.fecha = new Date(pedido.fecha);
         $scope.modificar.id_Local = pedido.id_Local;
         $scope.modificar.realizadaEncuesta = pedido.realizadaEncuesta;
 

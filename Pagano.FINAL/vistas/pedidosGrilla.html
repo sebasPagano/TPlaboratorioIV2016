@@ -41,11 +41,11 @@
 				<td> {{pedido.id}} </td>
 				<td ng-repeat="sucursal in listadoSucursales track by $index" ng-if="pedido.id_Local==sucursal.id_Local">{{sucursal.localidad}}</td>
 
-				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
+				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente' && usuario.id_Local == pedido.id_Local"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
 
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
-				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<td ng-if="usuario.tipo!='Cliente' && usuario.id_Local == pedido.id_Local"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
 			</span>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>				 
@@ -63,14 +63,14 @@
 			    	<option ng-repeat="producto in listadoProductos track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
 			    </select>
 				<input type="text" ng-model="modificar.cantidad" placeholder="ingrese cantidad" required/>
-				<input type="date" ng-model="modificar.fecha" placeholder="Ingrese nombre" required> 
+				<font color="black">Fecha:<input type="date" ng-model="modificar.fecha" required> </font>
 				<input type="text" ng-model="modificar.id" placeholder="Ingrese id del cliente" required> 
 
 				<select  ng-model="modificar.id_Local"  required>
 			    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
 		   		 </select>
 
-				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid && modificar.fecha.getTime()>fecha1.getTime()" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
 					
 				</div>
 			</div>

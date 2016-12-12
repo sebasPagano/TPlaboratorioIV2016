@@ -15,7 +15,7 @@
 				<td> {{oferta.id_Local}} </td>
 				<td> {{oferta.fecha}} </td>
 	
-				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(oferta)" class="btn btn-default btn-primary"> Modificar </button> </td>
+				<td ng-if="usuario.tipo!='Cliente' && usuario.id_Local == oferta.id_Local"> <button ng-click="desplegarMod(oferta)" class="btn btn-default btn-primary"> Modificar </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>			 
 			    
