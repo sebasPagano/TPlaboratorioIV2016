@@ -141,6 +141,7 @@ angular
         $scope.modificar.latitud = sucursal.latitud;
         $scope.modificar.longitud = sucursal.longitud;
         $scope.modificar.direccion = sucursal.direccion;
+       
         $scope.modo = true;
 
 

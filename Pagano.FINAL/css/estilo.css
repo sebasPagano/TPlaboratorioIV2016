@@ -154,7 +154,12 @@ left:0px;
 }
 #formEncuesta {
 
-  background:#f0f0f0;
+  background:#008B8B; 
+  padding:6% 4%;
+}
+#formAlta {
+
+  background: #008B8B; 
   padding:6% 4%;
 }
 

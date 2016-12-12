@@ -5,8 +5,9 @@
 	<div class="CajaInicio animated bounceInRight">
          <h1>Ingrese pedido</h1>
 
-		<form name="formAlta" align='center' enctype="multipart/form-data" > 		
+		<form name="formAlta" id="formAlta" align='center' enctype="multipart/form-data" > 		
  			<font color="white">Aclaracion: Para reservar un pedido debe ser con un minimo de 2 dias de anticipacion y un maximo de 5.</font>
+ 			<hidden ng-init="alta.descripcion='Muzzarella'">
 			<select  ng-model="alta.descripcion"  required>
 			    	<option ng-repeat="producto in listado track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
 		    </select>

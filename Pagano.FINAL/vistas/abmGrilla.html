@@ -29,8 +29,13 @@
 				
 
 
-				<td ng-if="usuario.id>4 &&usuarioM.tipo!='Empleado'"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
-				<td ng-if="usuario.id>4 && usuarioM.tipo!='Empleado'"> <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+				<td ng-if="usuario.id>4 && usuarioM.tipo!='Empleado' && usuarioM.tipo!='Administrador' && usuario.tipo!='Encargado'" > <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
+				<td ng-if="usuario.id>4 && usuarioM.tipo!='Empleado' && usuarioM.tipo!='Administrador' && usuario.tipo!='Encargado'" > <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+
+				<td ng-if="usuario.id>4 &&usuarioM.tipo!='Empleado'  && usuarioM.tipo=='Administrador'"> <button class="btn btn-default btn-primary" class="miBotonUtn" ng-click="borrar(usuario.id)"> Borrar </button> </td>
+				<td ng-if="usuario.id>4 && usuarioM.tipo!='Empleado' && usuarioM.tipo=='Administrador'" > <button class="btn btn-default btn-primary" ng-click="desplegarMod(usuario)"> Modificar </button> </td>
+
+			
 
 			</tr>			 
 			    
@@ -52,11 +57,22 @@
 			    	<option value="Empleado">Empleado</option>
 			    	<option value="Cliente">Cliente</option>
 			    </select>
-			    <hidden ng-init="modificar.estado='desbloqueado'"></hidden>
+			   <!-- <hidden ng-init="modificar.estado='desbloqueado'"></hidden>
+
 			    <select  ng-model="modificar.id_Local"  required>
 						<option value="0">Todos</option>
 				    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
+			    </select>-->
+			    			<hidden ng-init="modificar.estado='desbloqueado'"></hidden>
+			<hidden ng-if="modificar.tipo=='Cliente'" ng-init="modificar.id_Local='0'"></hidden>
+		
+
+			<span ng-if="usuario.tipo!='Cliente' && usuario.tipo!='Empleado'">
+				<select  ng-model="modificar.id_Local"  required>
+						<option ng-if="modificar.tipo != 'Empleado' && modificar.tipo != 'Encargado'" value="0">Todos</option>
+				    	<option ng-if="modificar.tipo != 'Cliente'" ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
 			    </select>
+			</span>
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar usuario!</a>
 					

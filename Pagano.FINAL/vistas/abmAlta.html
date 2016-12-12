@@ -1,11 +1,13 @@
 	<div class="container">
 		<div class="page-header">
-			<center> <h1>Agregar Usuario</h1>   </center>     
+			<center> <h1 ng-if="ConectadoAlta">Agregar Usuario</h1>   </center>  
+			<center> <h1 ng-if="!ConectadoAlta">Registro</h1>   </center>       
 		</div>
 		<div class="CajaInicio animated bounceInRight">
-             <h1>Ingrese Usuario</h1>
+             <h1 ng-if="ConectadoAlta">Ingrese Usuario</h1>
+             <h1 ng-if="!ConectadoAlta">Complete sus datos</h1>
 
-			<form name="formAlta" align='center' enctype="multipart/form-data" >
+			<form name="formAlta" id="formAlta" align='center' enctype="multipart/form-data" >
 			 
 				
 			<input type="text" ng-model="alta.correo" placeholder="ingrese correo" required/>
@@ -21,10 +23,11 @@
 			</span>
 			<hidden ng-init="alta.estado='desbloqueado'"></hidden>
 			<hidden ng-init="alta.id_Local='0'"></hidden>
+			<hidden ng-if="alta.tipo=='Empleado'" ng-init="alta.id_Local='1'"></hidden>
 			<span ng-if="ConectadoAlta==true  && usuario.tipo!='Cliente' && usuario.tipo!='Empleado'">
 				<select  ng-model="alta.id_Local"  required>
-						<option value="0">Todos</option>
-				    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
+						<option ng-if="alta.tipo != 'Empleado'" value="0">Todos</option>
+				    	<option ng-if="alta.tipo != 'Cliente'" ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
 			    </select>
 			</span>
 

@@ -51,6 +51,7 @@ angular
             console.info("Error: ", error);
 
         });
+        $state.go('menu.grillaProducto');
 
 
     }

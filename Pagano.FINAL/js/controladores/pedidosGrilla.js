@@ -38,7 +38,7 @@ var f = new Date();
         console.info("Error: ", error);
 
     });
-       console.log("Listado ASDASD: ",$scope.listado);
+      
 
     $scope.RealizarEncuesta = function(descripcion,pedido)
     {

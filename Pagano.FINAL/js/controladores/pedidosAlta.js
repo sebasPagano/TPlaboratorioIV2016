@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('PedidosAltaCtrl',function($scope,$http,FileUploader,$auth,FactoryProducto,FactoryPedido,FactorySucursal){
+  .controller('PedidosAltaCtrl',function($scope,$http,$state,FileUploader,$auth,FactoryProducto,FactoryPedido,FactorySucursal){
 /*  function fechahoy()
   {
      var f = new Date();
@@ -102,6 +102,7 @@ $scope.listado=[];
             console.info("Error: ", error);
 
         });
+       $state.go('menu.pedidosGrilla');
 
       /*  $http.post("http://localhost:8080/Pagano.FINAL/ws1/pedido",$scope.alta)
             .then(function (respuesta){

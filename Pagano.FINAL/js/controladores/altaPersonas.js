@@ -1,6 +1,6 @@
 angular
   .module('proyecto')
-  .controller('abmAltaCtrl',function($scope,FactoryUsuario,$http,FileUploader,$auth,FactorySucursal){
+  .controller('abmAltaCtrl',function($scope,$state,FactoryUsuario,$http,FileUploader,$auth,FactorySucursal){
 
     $scope.ConectadoAlta=$auth.isAuthenticated();
     if($scope.ConectadoAlta==true)
@@ -45,6 +45,10 @@ $scope.usuario = $auth.getPayload().usuarioLogueado;
             console.info("Error: ", error);
 
         });
+        if($scope.ConectadoAlta!=true)
+        {
+            $state.go('inicio');
+        }
 
 
     }

@@ -4,21 +4,22 @@ angular
 
     $scope.usuario = $auth.getPayload().usuarioLogueado;
 	var f = new Date();
-	var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
-	console.log(fecha);
+    var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
+	$scope.fechaHoy= new Date(f.getFullYear(), f.getMonth(), f.getDate());
  
 	$scope.listado = {};
     $scope.modificar = {};
     $scope.modo = false;
 
     FactoryOferta.Listado().then(function(respuesta){
-        var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
+       
+     
         $scope.listado = respuesta.data;
         console.info("Listado: ", $scope.listado);
        for(var i=0;i<$scope.listado.length;i++)
       {
-
-        if($scope.listado[i].fecha < fecha)
+        
+        if($scope.listado[i].fecha< fecha)
         {
 
             FactoryOferta.Borrar($scope.listado[i].id_oferta).then(function(rta){
@@ -82,7 +83,7 @@ angular
         $scope.modo = true;
 
         $scope.modificar.nombre = oferta.nombre;
-        $scope.modificar.fecha = oferta.fecha;
+        $scope.modificar.fecha = new Date(oferta.fecha);
         $scope.modificar.id_Local = oferta.id_Local;
         console.info("Modificacionlsitado",$scope.listado);
     }

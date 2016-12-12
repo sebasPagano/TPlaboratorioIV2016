@@ -101,9 +101,11 @@ $scope.usuarioM = $auth.getPayload().usuarioLogueado;
 
     $scope.desplegarMod = function (persona){
 
+
         $scope.modificar = persona;
         $scope.modo = true;
-
+  
+   
         $scope.modificar.nombre = persona.nombre;
         $scope.modificar.tipo = persona.tipo;
         $scope.modificar.id_Local = persona.id_Local;

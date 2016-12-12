@@ -1,8 +1,13 @@
 angular
   .module('proyecto')
-  .controller('OfertasAltaCtrl',function($scope,$http,FileUploader,$auth,FactoryOferta){
+  .controller('OfertasAltaCtrl',function($scope,$state,$http,FileUploader,$auth,FactoryOferta){
 
   	$scope.alta = {};
+
+    var f = new Date();
+    var fecha =f.getFullYear() + "-"+(f.getMonth() +1)+"-"+f.getDate();
+    $scope.alta.fecha =new Date(f.getFullYear(), f.getMonth(), f.getDate());
+    $scope.fechaHoy= new Date(f.getFullYear(), f.getMonth(), f.getDate());
   	/*$scope.Buscar = function(id)
   	{
   	 $http.get("http://localhost:8080/Pagano.FINAL/ws1/productos/"+id)
@@ -47,6 +52,7 @@ angular
             console.info("Error: ", error);
 
         });
+          $state.go('menu.ofertasGrilla');
 
 
     }

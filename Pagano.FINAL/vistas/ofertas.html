@@ -29,11 +29,11 @@
 				<form name="formAlta" class="tablas" enctype="multipart/form-data">
 				<input type="text" ng-model="modificar.nombre" placeholder="Ingrese nombre" required> 
 				<input type="text" ng-model="modificar.costo" placeholder="Ingrese Costo" required> 
-				<input type="date" ng-model="modificar.fecha"  required> 
+				<font color="black">Fecha:<input type="date" ng-model="modificar.fecha"  required> </font>
 				<input type="text" ng-model="modificar.id_Local" placeholder="Ingrese id de la Sucursal" required>
 
 
-				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
+				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid && modificar.fecha.getTime() >= fechaHoy.getTime()" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
 					
 				</div>
 			</div>
