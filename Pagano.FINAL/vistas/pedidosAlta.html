@@ -6,19 +6,32 @@
          <h1>Ingrese pedido</h1>
 
 		<form name="formAlta" align='center' enctype="multipart/form-data" > 		
- 		
+ 			<font color="white">Aclaracion: Para reservar un pedido debe ser con un minimo de 2 dias de anticipacion y un maximo de 5.</font>
 			<select  ng-model="alta.descripcion"  required>
 			    	<option ng-repeat="producto in listado track by $index" value="{{producto.nombre}}">{{producto.nombre}}</option>  
 		    </select>
 			<input type="text" ng-model="alta.cantidad" placeholder="ingrese cantidad" required/>
-			<font color="black"><input type="date" ng-model="alta.fecha"  required> </font>
+
+			<!--<hidden  ng-init="alta.fecha=  ?>'" ></hidden>-->
+			<font color="black">Fecha:<input type="date" ng-model="alta.fecha"   required> </font>
 
 			<span ng-if="usuario.tipo!='Cliente'" >
 			<input type="text" ng-model="alta.id" placeholder="Ingrese id del cliente" required> 
 			</span>
-			<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Solicitar Pedido!</a>
-				
+			<hidden ng-init="alta.id_Local='1'"></hidden>
+			<select  ng-model="alta.id_Local"  required>
+			    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
+		    </select>
+		   <!-- <div ng-if="alta.fecha.getTime() == fecha1.getTime() || alta.fecha.getTime() == fecha2.getTime() || alta.fecha.getTime() == fecha3.getTime() || alta.fecha.getTime() == fecha4.getTime() || alta.fecha.getTime() == fecha5.getTime()">
+		    <input type="button" ng-click="fechaALTA()"  value="Fecha Alta"/>
+			</div>-->
+
+		 	<div ng-if="alta.fecha.getTime() == fecha1.getTime() || alta.fecha.getTime() == fecha2.getTime() || alta.fecha.getTime() == fecha3.getTime() || alta.fecha.getTime() == fecha4.getTime() || alta.fecha.getTime() == fecha5.getTime()">
+			<a  class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="guardar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Solicitar Pedido!</a>
 			</div>
+		
+				
+		</div>
 
 		</form>
 

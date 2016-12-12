@@ -119,15 +119,17 @@ class Producto{
 		public static function AgregarPedido($pedido){
 
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mispedidos (descripcion, precio ,cantidad, fecha, estado,id, id_producto)
-	                VALUES (:descripcion,:precio,:cantidad,:fecha,:estado ,:id,:id_producto)");
+	    $consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO mispedidos (descripcion, precio ,cantidad, fecha, estado,realizadaEncuesta,id, id_producto,id_Local)
+	                VALUES (:descripcion,:precio,:cantidad,:fecha,:estado ,:realizadaEncuesta,:id,:id_producto,:id_Local)");
 	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
 	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
 	    $consulta->bindValue(":estado", $pedido["estado"], PDO::PARAM_STR);
+	    $consulta->bindValue(":realizadaEncuesta", $pedido["realizadaEncuesta"], PDO::PARAM_STR);
 	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
 	   	$consulta->bindValue(":cantidad", $pedido["cantidad"], PDO::PARAM_INT);
+	   	$consulta->bindValue(":id_Local", $pedido["id_Local"], PDO::PARAM_INT);
 	    $consulta->execute();
 
 	    return $objetoAccesoDato->RetornarUltimoIdInsertado();
@@ -136,15 +138,19 @@ class Producto{
 	public static function ModificarPedido($pedido){
 	    $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 	    $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE mispedidos
-	        SET descripcion = :descripcion, precio = :precio, cantidad = :cantidad,fecha = :fecha,estado = :estado,id=:id,id_producto = :id_producto WHERE id_pedido = :id_pedido");
+	        SET descripcion = :descripcion, precio = :precio, cantidad = :cantidad,fecha = :fecha,estado = :estado,realizadaEncuesta = :realizadaEncuesta
+	        ,id=:id,id_producto = :id_producto, id_Local = :id_Local WHERE id_pedido = :id_pedido");
 	    $consulta->bindValue(":descripcion", $pedido["descripcion"], PDO::PARAM_STR);
 	    $consulta->bindValue(":precio", $pedido["precio"], PDO::PARAM_INT);
 	    $consulta->bindValue(":fecha", $pedido["fecha"], PDO::PARAM_STR);
 	     $consulta->bindValue(":estado", $pedido["estado"], PDO::PARAM_STR);
+	      $consulta->bindValue(":realizadaEncuesta", $pedido["realizadaEncuesta"], PDO::PARAM_STR);
 	    $consulta->bindValue(":id_producto", $pedido["id_producto"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id", $pedido["id"], PDO::PARAM_INT);
 	    $consulta->bindValue(":id_pedido", $pedido["id_pedido"], PDO::PARAM_INT);
 	   	$consulta->bindValue(":cantidad", $pedido["cantidad"], PDO::PARAM_INT);
+	   	$consulta->bindValue(":id_Local", $pedido["id_Local"], PDO::PARAM_INT);
+
 	    return $consulta->execute();
 	}
 

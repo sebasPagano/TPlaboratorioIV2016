@@ -1,6 +1,6 @@
 <div class="container">
 		<div ng-if="!modo && !modoEncuesta">
-		<table class="table table-hover table-responsive" align="center">
+		<table class="table table-hover table-responsive" align="left">
 			<tr>
 			    <th>ID</th>
 			    <th>DESCRIPCION</th> 
@@ -8,8 +8,9 @@
 			    <th>CANTIDAD</th>
 			   	<th>FECHA</th> 
 			   	<th>ESTADO</th>
-			    <th>ID</th>
-			    <th>ID_PRODUCTO</th>
+			    <th>ID_CLIENTE</th>
+			    <th>NOMBRE_LOCAL</th>
+		
 			    
 			</tr>
 			<tr ng-if="usuario.tipo=='Cliente'" ng-repeat="pedido in listado track by $index">
@@ -21,17 +22,16 @@
 				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.fecha}} </td>
 				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.estado}} </td>
 				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.id}} </td>
-				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id"> {{pedido.id_producto}} </td>
+				<td ng-repeat="sucursal in listadoSucursales track by $index" ng-if="pedido.id_Local==sucursal.id_Local && usuario.tipo=='Cliente' && usuario.id==pedido.id">{{sucursal.localidad}}</td>
 
 				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
 
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
-				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id && pedido.estado!='pendiente'"> <button ng-click="RealizarEncuesta(pedido.descripcion)" class="btn btn-default btn-primary"> Realizar Encuesta </button> </td>
+				<td ng-if="usuario.tipo=='Cliente' && usuario.id==pedido.id && pedido.estado!='pendiente' && pedido.realizadaEncuesta=='no'"> <button ng-click="RealizarEncuesta(pedido.descripcion,pedido)" class="btn btn-default btn-primary"> Realizar Encuesta </button> </td>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>		
-			<tr ng-if="usuario.tipo!='Cliente'" ng-repeat="pedido in listado track by $index">
-
+			<tr ng-if="usuario.tipo!='Cliente' && pedido.estado =='pendiente'" ng-repeat="pedido in listado track by $index">
 				<td> {{pedido.id_pedido}} </td>
 				<td> {{pedido.descripcion}} </td>
 				<td> {{pedido.precio}} </td>
@@ -39,18 +39,19 @@
 				<td> {{pedido.fecha}} </td>
 				<td> {{pedido.estado}} </td>
 				<td> {{pedido.id}} </td>
-				<td> {{pedido.id_producto}} </td>
+				<td ng-repeat="sucursal in listadoSucursales track by $index" ng-if="pedido.id_Local==sucursal.id_Local">{{sucursal.localidad}}</td>
 
 				<td ng-if="pedido.estado=='pendiente' && usuario.tipo!='Cliente'"> <button ng-click="Estado(pedido)" class="btn btn-default btn-primary"> Cerrar pedido </button> </td>
 
 				<td ng-if="pedido.estado!='pendiente'">  </td>
 
 				<td ng-if="usuario.tipo!='Cliente'"> <button ng-click="desplegarMod(pedido)" class="btn btn-default btn-primary"> Modificar </button> </td>
-
+			</span>
 				<!-- ng-if="usuario.tipo!='comprador'" -->
 			</tr>				 
 			    
 		</table>
+
 		</div> <!-- div modo -->
 
 			<div ng-if="modo">
@@ -63,6 +64,11 @@
 			    </select>
 				<input type="text" ng-model="modificar.cantidad" placeholder="ingrese cantidad" required/>
 				<input type="date" ng-model="modificar.fecha" placeholder="Ingrese nombre" required> 
+				<input type="text" ng-model="modificar.id" placeholder="Ingrese id del cliente" required> 
+
+				<select  ng-model="modificar.id_Local"  required>
+			    	<option ng-repeat="sucursal in listadoSucursales track by $index" value="{{sucursal.id_Local}}">{{sucursal.localidad}}</option>  
+		   		 </select>
 
 				<a class="btn btn-warning" name="guardar" ng-disabled="formAlta.$invalid" ng-if="!formAlta.$invalid" ng-click="actualizar()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Editar Producto!</a>
 					
@@ -114,7 +120,7 @@
 
 			<center><font color="black"><textarea ng-model="alta.comentarios" name="ejemploarea" cols="30" rows="3"  maxlength="50" placeholder="Ingrese un breve comentario"></textarea></font></center>
 
-			<a class="btn btn-warning" name="guardar" ng-disabled="formEncuesta.$invalid" ng-if="!formEncuesta.$invalid" ng-click="guardarEncuesta()" ><span class="glyphicon glyphicon-save">&nbsp;</span>Enviar Encuesta!</a>
+			<a class="btn btn-warning" name="guardar" ng-disabled="formEncuesta.$invalid" ng-if="!formEncuesta.$invalid" ng-click="guardarEncuesta(pedidoEncuesta)" ><span class="glyphicon glyphicon-save">&nbsp;</span>Enviar Encuesta!</a>
 			
 
 			</form>
