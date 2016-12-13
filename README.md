@@ -31,7 +31,10 @@ TP LaboratorioIV 2016
 <h5>Objetivo:Lograr una aplicacion funcional sin errores.</h5>
 -------------------------------------------------------------------------------------
 
-
+Alumno: Sebastián Pagano.
+Curso: 4ºA
+Empresa: Pizzeria Argenta S.R.L.
+Pagina Web: http://paganosj.esy.es/
 
 
 
